@@ -7,14 +7,19 @@
 | - OR
 := - defined as
 
-NODE := <MONTH>|<DATE>|<DAY>|<DURATION>|<TIME>|<SCHEDULE>|<String>
-LET := LET <String> = <NODE>
+STATEMENT := <LET>|<SCHEDULE>|<FOR>
+NODE := <MONTH>|<DATE>|<DAY>|<DURATION>|<TIME>|<GUEST>|<ID>|<String>
+ID := $<String>
+NODESET := {<NODE> (, <NODE>)*}
+LET := LET <String> = (<NODE>|<NODESET>)
+FOR := FOR <String> IN <NODESET> <STATEMENT>* ENDFOR
 MONTH := January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept|Oct|Nov|Dec
 DATE := <MONTH> <Num>[st|th] | <Num>[st|th] OF <MONTH>
 DAY := Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|Mon|Tues|Wed|Thur|Fri|Sat|Sun|<DATE>
 DURATION := <Num> (hours|minutes|seconds)
 TIME := <Num>[ ][AM|PM|am|pm]
-SCHEDULE := SCHEDULE <String> AT <TIME> [FOR <DURATION>] [AT LOCATION <String>] [ON [EVERY ]<DAY> [AND <DAY>]*  [UNTIL <DATE>]]
+GUEST := <Any Valid Email>
+SCHEDULE := SCHEDULE <NODE> AT <NODE> [FOR <NODE>] [AT LOCATION <NODE>] [ON [EVERY ]<NODE> [AND <NODE>]*  [UNTIL <NODE>]][WITH (<NODE>|<NODESET>)]
 ```
 
 ## Notes From TA 

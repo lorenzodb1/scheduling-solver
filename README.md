@@ -14,7 +14,7 @@ DATE := <MONTH> <Num>[st|th] | <Num>[st|th] OF <MONTH>
 DAY := Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|Mon|Tues|Wed|Thur|Fri|Sat|Sun|<DATE>
 DURATION := <Num> (hours|minutes|seconds)
 TIME := <Num>[ ][AM|PM|am|pm]
-SCHEDULE := SCHEDULE <String> AT <TIME> [FOR <DURATION>] [AT LOCATION <String>] [ON [EVERY ]<DAY> [and <DAY>]*  [UNTIL <DATE>]]
+SCHEDULE := SCHEDULE <String> AT <TIME> [FOR <DURATION>] [AT LOCATION <String>] [ON [EVERY ]<DAY> [AND <DAY>]*  [UNTIL <DATE>]]
 ```
 
 ## Notes From TA 

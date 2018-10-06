@@ -4,7 +4,7 @@ package interpreter
  * Note that initString should include the curly braces
  * ex: initString = {a, b, 10 hours, 5pm}
  */
-class SetNode(initString: String) {
+class NodeSet(initString: String) {
 
     lateinit var nodes: Array<Node>
 

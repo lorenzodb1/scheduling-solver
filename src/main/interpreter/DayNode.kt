@@ -1,3 +1,5 @@
+package interpreter
+
 class DayNode(s: String) : Node(s) {
 
     enum class Day {

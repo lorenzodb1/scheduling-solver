@@ -1,7 +1,9 @@
+package interpreter
+
 abstract class Node(s: String) {
     /**
      * TODO: better description?
-     * Interprete the Node
+     * Interprete the interpreter.Node
      */
     abstract public fun interp()
 

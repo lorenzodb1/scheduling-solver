@@ -1,3 +1,5 @@
+package interpreter
+
 class ForStatement(forString: String) : Statement(forString) {
 
     lateinit var id: IdNode

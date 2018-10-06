@@ -1,3 +1,5 @@
+package interpreter
+
 class ScheduleNode(scheduleString: String) : Node(scheduleString) {
 
     lateinit var description: String

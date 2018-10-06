@@ -1,3 +1,5 @@
+package interpreter
+
 class LetStatement(letString: String) : Statement(letString) {
 
     lateinit var id: String

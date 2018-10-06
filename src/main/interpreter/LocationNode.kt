@@ -1,3 +1,5 @@
+package interpreter
+
 class LocationNode(locationString: String) : Node(locationString) {
 
     // TODO: determine proper datatype to represent location

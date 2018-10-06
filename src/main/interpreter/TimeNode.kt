@@ -1,3 +1,7 @@
+package interpreter
+
+import interpreter.Node
+
 class TimeNode(timeString: String) : Node(timeString) {
 
     // assume 24 hour time:

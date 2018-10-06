@@ -3,7 +3,7 @@ package interpreter
 class ForStatement(forString: String) : Statement(forString) {
 
     lateinit var id: IdNode
-    lateinit var nodeSet: NodeSet
+    lateinit var nodeSet: SetNode
     lateinit var statements: Array<Statement>
 
     init {

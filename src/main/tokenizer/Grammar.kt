@@ -56,5 +56,9 @@ object Grammar {
     fun isEndForKey(key: String): Boolean {
         return endForStatementKeys.indexOf(key) > -1
     }
+
+    fun isInKey (key: String): Boolean{
+        return endForStatemetKey.indexOf(key) > -1
+    }
 }
 

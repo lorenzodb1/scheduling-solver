@@ -6,7 +6,9 @@ class LetStatement(letString: String): Statement(letString) {
     lateinit var value: Node
 
     init {
-        //TODO: parse letString and initialize id and value
+        //parse statment further and interpret
+        private val statementDividerRegex: Regex = Regex("""\s""")
+
     }
 
     public override fun interp() {

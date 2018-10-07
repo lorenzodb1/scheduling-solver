@@ -34,3 +34,5 @@ class ForStatement(forString: String) : Statement(forString) {
     override public fun interp() {
     }
 }
+
+{ 1, 2, 3 }

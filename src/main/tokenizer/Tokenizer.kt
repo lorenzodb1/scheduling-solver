@@ -15,7 +15,7 @@ class Tokenizer {
     //TODO - lorenzodb1: What should we do with the return value of ScheduleStatement(partialStatement.toString())?
     fun tokenize(statement: String): Unit {
         val statementIterator: Iterator<String> = statement.split(STATEMENT_DIVIDER_REGEX).iterator()
-        var key = statementIterator.next()
+        var key: String = statementIterator.next()
         while (statementIterator.hasNext()) {
             val partialStatement = StringBuilder("")
             if (isLetKey(key)) {
@@ -33,7 +33,7 @@ class Tokenizer {
                 ScheduleStatement(partialStatement.toString())
                 continue
             } else if (isForKey(key)) {
-                var nestedForCounter = 0
+                var nestedForCounter: Int = 0
                 do {
                     partialStatement.append(key)
                     key = statementIterator.next()

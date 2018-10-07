@@ -1,6 +1,6 @@
 package interpreter
 
-class ScheduleNode(scheduleString: String) : Node(scheduleString) {
+class ScheduleStatement(scheduleString: String) : Node(scheduleString) {
 
     lateinit var description: String
     lateinit var time: TimeNode

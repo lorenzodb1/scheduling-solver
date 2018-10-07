@@ -1,6 +1,6 @@
 package interpreter
 
-class LetStatement(letString: String) : Statement(letString) {
+class LetStatement(letString: String): Statement(letString) {
 
     lateinit var id: String
     lateinit var value: Node

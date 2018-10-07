@@ -17,14 +17,14 @@ class Tokenizer {
             if (Grammar.isLetKey(key)) {
                 do {
                     partialStatement.append(key)
-                    key = statementIterator.iterator().next()
+                    key = statementIterator.next()
                 } while (!Grammar.isStatementKey(key) && statementIterator.hasNext())
                 LetStatement(partialStatement.toString())
                 continue
             } else if (Grammar.isScheduleKey(key)) {
                 do {
                     partialStatement.append(key)
-                    key = statementIterator.iterator().next()
+                    key = statementIterator.next()
                 } while (!Grammar.isStatementKey(key) && statementIterator.hasNext())
                 ScheduleStatement(partialStatement.toString())
                 continue
@@ -32,7 +32,7 @@ class Tokenizer {
                 var nestedForCounter = 0
                 do {
                     partialStatement.append(key)
-                    key = statementIterator.iterator().next()
+                    key = statementIterator.next()
                     if (Grammar.isForKey(key)) nestedForCounter += 1
                     if (Grammar.isEndForKey(key)) nestedForCounter -= 1
                 } while (!Grammar.isEndForKey(key) && nestedForCounter == 0 && statementIterator.hasNext())

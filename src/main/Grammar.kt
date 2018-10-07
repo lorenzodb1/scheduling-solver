@@ -1,5 +1,3 @@
-package tokenizer
-
 internal object Grammar {
 
     private val statementArray: Array<String> = arrayOf("SCHEDULE",

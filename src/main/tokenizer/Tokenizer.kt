@@ -2,11 +2,15 @@ package tokenizer
 
 class Tokenizer {
 
-    private val statementRegex = "\n".toRegex()
+    private val statementDividerRegex = " ".toRegex()
 
-    //TODO - lorenzodb1: Assumption on order of SCHEDULE, LET and FOR! Must find a way not to hardcode it!
     fun tokenize(statement: String): String {
-        val splitStatement: Array<String> = statement.split(statementRegex).toTypedArray()
+        val statementArray: Array<String> = statement.split(statementDividerRegex).toTypedArray()
+        for (key in statementArray) {
+            if () {
+                
+            }
+        }
 
         return ""
     }

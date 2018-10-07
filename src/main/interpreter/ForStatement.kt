@@ -7,7 +7,7 @@ class ForStatement(forString: String) : Statement(forString) {
 
     lateinit var id: IdNode
     lateinit var nodeSet: NodeSet
-    lateinit var statements: Statement
+    lateinit var statements: StatementList
 
     private val statementDividerRegex: Regex = Regex("""\s""")
     private val curlyBraceRegex: Regex = Regex("\{([^}]+)\}")

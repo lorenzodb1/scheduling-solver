@@ -1,3 +1,5 @@
+package interpreter
+
 import interpreter.Statement
 
 class StatementList(s: String) {
@@ -9,5 +11,7 @@ class StatementList(s: String) {
         //TODO: parse s into a list of statements and initialize properties
     }
 
-    abstract public fun interp()
+    fun interp() {
+
+    }
 }

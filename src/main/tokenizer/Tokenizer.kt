@@ -1,16 +1,15 @@
 package tokenizer
 
+import Utils.STATEMENT_DIVIDER_REGEX
 import interpreter.ForStatement
 import interpreter.LetStatement
 import interpreter.ScheduleStatement
 
 class Tokenizer {
 
-    private val statementDividerRegex: Regex = Regex("""\s""")
-
     //TODO - lorenzodb1: What should we do with the result of ScheduleStatement(partialStatement.toString())?
     fun tokenize(statement: String): Unit {
-        val statementIterator: Iterator<String> = statement.split(statementDividerRegex).iterator()
+        val statementIterator: Iterator<String> = statement.split(STATEMENT_DIVIDER_REGEX).iterator()
         var key = statementIterator.next()
         while (statementIterator.hasNext()) {
             val partialStatement = StringBuilder("")

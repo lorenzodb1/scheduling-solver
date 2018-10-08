@@ -1,11 +1,11 @@
 package interpreter
 
-import Utils.STATEMENT_DIVIDER_REGEX
-import tokenizer.Grammar.isLetKey
+import utils.Constants.STATEMENT_DIVIDER_REGEX
+import utils.Grammar.isLetKey
 
 class LetStatement(letString: String): Statement(letString) {
 
-    lateinit var id: String //TODO - lorenzodb1: Why is this a String and not a IdNode?
+    lateinit var id: String
     lateinit var value: Node
 
     init {

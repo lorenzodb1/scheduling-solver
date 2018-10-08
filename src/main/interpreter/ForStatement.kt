@@ -1,9 +1,9 @@
 package interpreter
 
-import Utils.STATEMENT_DIVIDER_REGEX
-import tokenizer.Grammar.isForKey
-import tokenizer.Grammar.isInKey
-import tokenizer.Grammar.isValidId
+import utils.Constants.STATEMENT_DIVIDER_REGEX
+import utils.Grammar.isForKey
+import utils.Grammar.isInKey
+import utils.Grammar.isValidId
 
 
 class ForStatement(forString: String) : Statement(forString) {

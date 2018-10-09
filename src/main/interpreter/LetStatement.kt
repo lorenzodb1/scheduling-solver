@@ -1,6 +1,6 @@
 package interpreter
 
-import utils.Constants.STATEMENT_DIVIDER_REGEX
+import utils.Constant.STATEMENT_DIVIDER_REGEX
 import utils.Grammar.isLetKey
 
 class LetStatement(letString: String): Statement(letString) {

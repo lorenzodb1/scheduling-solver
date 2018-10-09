@@ -1,6 +1,6 @@
 package interpreter
 
-import utils.Constants.STATEMENT_DIVIDER_REGEX
+import utils.Constant.STATEMENT_DIVIDER_REGEX
 import utils.Grammar.isEndForKey
 import utils.Grammar.isForKey
 import utils.Grammar.isLetKey

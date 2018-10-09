@@ -1,6 +1,6 @@
 package interpreter
 
-import utils.Constants.STATEMENT_DIVIDER_REGEX
+import utils.Constant.STATEMENT_DIVIDER_REGEX
 import utils.Grammar.isForKey
 import utils.Grammar.isInKey
 import utils.Grammar.isValidId
@@ -27,10 +27,12 @@ class ForStatement(forString: String) : Statement(forString) {
                 val inKey: String = forStatementIterator.next()
                 if (isInKey(inKey)) {
                     val rangeString: String = forStatementIterator.next()
-                    nodeSet = NodeSet(rangeString) //TODO - lorenzodb1: Are brackets included in rangeString or nah?
+                    nodeSet = NodeSet(rangeString) //TODO - lorenzodb1: Are brackets included in rangeString?
                 }
                 val forLoopBody = StringBuilder("")
-                while (forStatementIterator.hasNext()) forLoopBody.append(forStatementIterator.next())
+                while (forStatementIterator.hasNext()) {
+                    forLoopBody.append(forStatementIterator.next())
+                }
                 statements = StatementList(forLoopBody.toString())
             }
         }

@@ -13,7 +13,7 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
         //TODO: parse scheduleString and initialize properties
     }
 
-    public override fun interp() {
+    override fun interp() {
         //TODO: implement
     }
 }

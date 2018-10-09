@@ -117,6 +117,18 @@ class ForStatementTest {
                 forStatement.statements);
     }
 
+    // Test constructing a nested FOR loop with id shadowing
+    @Test
+    fun constructForStatement_nested_loops_id_shadowed() {
+        var forString = "FOR \$X IN {5pm, 6pm} FOR \$X IN {3pm, 4pm} SCHEDULE dinner AT \$X ENDFOR ENDFOR"
+        var forStatement = ForStatement(forString);
+
+        assertEquals(IdNode("\$X"), forStatement.id)
+        assertEquals(NodeSet("{5pm, 6pm"), forStatement.nodeSet)
+        assertEquals(StatementList("FOR \$X IN {3pm, 4pm} SCHEDULE dinner AT \$X ENDFOR FOR \$X IN {3pm, 4pm} SCHEDULE dinner AT \$X ENDFOR"),
+                forStatement.statements);
+    }
+
     @Test
     fun constructForStatement_missing_ENDFOR() {
         var forString = "FOR \$X IN {5pm} SCHEDULE dinner AT \$X"

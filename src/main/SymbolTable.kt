@@ -1,3 +1,5 @@
+import interpreter.Node
+
 class SymbolTable {
     companion object {
         private val table = HashMap<String, Node>()

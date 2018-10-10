@@ -1,3 +1,5 @@
+package interpreter
+
 /**
  * Note that initString should include the curly braces
  * ex: initString = {a, b, 10 hours, 5pm}

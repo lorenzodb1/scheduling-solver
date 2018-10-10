@@ -1,3 +1,5 @@
+package interpreter
+
 class DurationNode(s: String) : Node(s) {
     var seconds: Int = 0
 

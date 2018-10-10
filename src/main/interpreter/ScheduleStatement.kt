@@ -29,7 +29,6 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
                 guests = GuestNode(letScheduleIterator.next())
             } return null
 
-
         }
     }
 

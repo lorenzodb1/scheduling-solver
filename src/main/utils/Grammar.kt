@@ -76,6 +76,14 @@ object Grammar {
         return withKeys.indexOf(key) > -1
     }
 
+    internal fun isMonthArray (key: String): Boolean{
+        return monthArray.indexOf(key) > -1
+    }
+
+    internal fun isDurationArray (key: String): Boolean{
+        return durationArray.indexOf(key) > -1
+    }
+
 
 }
 

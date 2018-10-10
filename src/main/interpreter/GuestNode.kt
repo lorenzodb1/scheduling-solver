@@ -1,3 +1,5 @@
+package interpreter
+
 class GuestNode(emailString: String) : Node(emailString) {
 
     lateinit var email: String

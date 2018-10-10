@@ -1,6 +1,6 @@
 # SchedulingSolver
 
-## Grammar
+## tokenizer.Grammar
 ```
 [ ] - optional group
 ( ) - non-optional group

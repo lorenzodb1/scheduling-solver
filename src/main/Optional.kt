@@ -9,7 +9,7 @@
  * }
  *
  */
-sealed class OptionalNode<T: Node> {
-    data class Some<T: Node>(val node: T) : OptionalNode<T>()
-    data class Id<T: Node>(val id: IdNode) : OptionalNode<T>()
+sealed class Optional<T> {
+    data class Some<T>(val node: T) : Optional<T>()
+    data class Id<T>(val id: IdNode) : Optional<T>()
 }

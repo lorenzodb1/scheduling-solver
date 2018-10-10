@@ -27,6 +27,7 @@ class DateNode(dateString: String) : Node(dateString) {
                 val remove_th = day.split("th")
                 val number = remove_th
                 dayOfMonth = number
+                val for_word = dateIterator.next()
                 month = dateIterator.next()
             }
 

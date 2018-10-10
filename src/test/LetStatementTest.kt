@@ -166,4 +166,33 @@ class ForStatementTest {
     }
 
     var forString = "FOR \$X IN {5pm} SCHEDULE dinner AT \$X ENDFOR"
+
+//    val ourVal = 1
+//
+//    // lateinit indicates a non-nullable type that is yet to be constructed
+//    lateinit var foo: Foo
+//
+//    @BeforeAll
+//    internal fun beforeAll() {
+//        foo = Foo(ourVal)
+//    }
+//
+//    @Test
+//    fun canConstructFoo() {
+//        assertEquals(ourVal, foo.i())
+//    }
+//
+//    @Test
+//    fun testBar() {
+//        assertEquals(ourVal + 3, foo.bar(1, 2))
+//    }
+//
+//    @Test
+//    fun testBaz() {
+//        val word = "wowie"
+//        assertEquals(
+//            "word is: $word and i is: $ourVal",
+//            foo.baz(word)
+//        )
+//    }
 }

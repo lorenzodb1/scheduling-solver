@@ -1,7 +1,9 @@
 package interpreter
 
 import utils.Constant.STATEMENT_DIVIDER_REGEX
-import utils.Grammar.isLetKey
+import utils.Grammar.isAtKey
+import utils.Grammar.isScheduleKey
+import utils.Grammar.isWithKey
 
 class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
 
@@ -12,23 +14,22 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
     lateinit var dates: Array<DateNode>
     lateinit var guests: Array<GuestNode>
 
-    init UnsupportedEncodingException{
-        val letScheduleIterator = letString.split(STATEMENT_DIVIDER_REGEX).iterator()
-        val key = letScheduleIterator.next()
-        while (letStatementIterator.hasNext()) {
+    init {
+        val scheduleStatementIterator = scheduleString.split(STATEMENT_DIVIDER_REGEX).iterator()
+        val key = scheduleStatementIterator.next()
+        while (scheduleStatementIterator.hasNext()) {
             if (isScheduleKey(key)) {
-                description = letScheduleIterator.next()
-            } return null
-            if (isAtKey(key.letScheduleIterator.next())) {
-                location = LocationNode(letScheduleIterator.next())
-            } return null
-            duration = DurationNode(letScheduleIterator.next())
-            dates = DateNode(letScheduleIterator.next())
+                description = scheduleStatementIterator.next()
+            }
+            else if (isAtKey(scheduleStatementIterator.next())) {
+                location = LocationNode(scheduleStatementIterator.next())
+            }
+            duration = DurationNode(scheduleStatementIterator.next())
+            dates = arrayOf(DateNode(scheduleStatementIterator.next()))
             //this is a unit - parsing by words doesn't really mean anything
-            if (isWithKey(letScheduleIterator.next())) {
-                guests = GuestNode(letScheduleIterator.next())
-            } return null
-
+            if (isWithKey(scheduleStatementIterator.next())) {
+                guests = arrayOf(GuestNode(scheduleStatementIterator.next()))
+            }
         }
     }
 

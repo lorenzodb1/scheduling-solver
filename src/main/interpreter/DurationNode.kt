@@ -32,4 +32,11 @@ class DurationNode(durationString: String) : Node(durationString) {
     override fun interp() {
         //TODO: implement
     }
+
+    override fun equals(other: Any?): Boolean {
+        return when (other) {
+            is DurationNode -> this.seconds.equals(other.seconds)
+            else -> false
+        }
+    }
 }

@@ -20,7 +20,7 @@ class MonthNode(s: String) : Node(s) {
     val month = determineMonth(s)
 
 
-    public override fun interp() {
+    override fun interp() {
         //TODO: implement
     }
 
@@ -28,6 +28,13 @@ class MonthNode(s: String) : Node(s) {
         fun determineMonth(monthString: String) : Month {
             //TODO: implement
             return Month.JANUARY
+        }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return when (other) {
+            is MonthNode -> this.month.equals(other.month)
+            else -> false
         }
     }
 }

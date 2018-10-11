@@ -30,4 +30,14 @@ class DateNode(dateString: String) : Node(dateString) {
     override fun interp() {
         //TODO: implement
     }
+
+    override fun equals(other: Any?): Boolean {
+        return when (other) {
+            is DateNode -> {
+                this.month.equals(other.month) &&
+                this.dayOfMonth.equals(other.dayOfMonth)
+            }
+            else -> false
+        }
+    }
 }

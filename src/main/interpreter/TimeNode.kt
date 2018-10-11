@@ -1,7 +1,5 @@
 package interpreter
 
-import interpreter.Node
-
 class TimeNode(timeString: String) : Node(timeString) {
 
     // assume 24 hour time:
@@ -14,7 +12,17 @@ class TimeNode(timeString: String) : Node(timeString) {
         //TODO: initialize hour and minute from timeString
     }
 
-    public override fun interp() {
+    override fun interp() {
         //TODO: implement
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return when (other) {
+            is TimeNode -> {
+                this.hour.equals(other.hour) &&
+                this.minute.equals(other.minute)
+            }
+            else -> false
+        }
     }
 }

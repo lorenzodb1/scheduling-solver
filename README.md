@@ -12,7 +12,7 @@ NODE := <MONTH>|<DATE>|<DAY>|<DURATION>|<TIME>|<GUEST>|<LOCATION>|<ID>|<String>
 ID := $<String>
 NODESET := {<NODE> (, <NODE>)*}
 LET := LET <ID> = (<NODE>|<NODESET>)
-FOR := FOR <ID> IN <NODESET> <STATEMENT>* ENDFOR
+FOR := FOR <ID> IN <NODESET> DO <STATEMENT>* ENDFOR
 MONTH := January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept|Oct|Nov|Dec
 DATE := <MONTH> <Num>[st|th] | <Num>[st|th] OF <MONTH>
 DAY := Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|Mon|Tues|Wed|Thur|Fri|Sat|Sun|<DATE>
@@ -29,3 +29,6 @@ SCHEDULE := SCHEDULE <NODE> AT <NODE> [FOR <NODE>] [IN <NODE>] [ON [EVERY ]<NODE
 - Ideas from TA
     - (variables) `Guests -> x -> asdaf@adfa.com, asdfasd@bbbb.com, ...`
     - Segregate events so that guests can't see each other?
+
+## Notes for Video
+- include "Rational Reconstruction": comparison of making a schedule in google calendar vs doing it in our language

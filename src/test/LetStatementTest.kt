@@ -7,6 +7,7 @@ import java.text.ParseException
 @TestInstance(TestInstance.Lifecycle.PER_CLASS) // This annotation is required for @BeforeAll to work
 class LetStatementTest {
 
+    /*
     // Test constructing a simple FOR loop with an empty Nodeset
     @Test
     fun constructForStatement_empty_nodeset() {
@@ -165,6 +166,8 @@ class LetStatementTest {
     }
 
     var forString = "FOR \$X IN {5pm} SCHEDULE dinner AT \$X ENDFOR"
+
+    */
 
 //    val ourVal = 1
 //

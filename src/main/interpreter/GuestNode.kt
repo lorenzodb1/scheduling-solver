@@ -17,4 +17,11 @@ class GuestNode(emailString: String) : Node(emailString) {
     override fun interp() {
         //TODO: implement
     }
+
+    override fun equals(other: Any?): Boolean {
+        return when (other) {
+            is GuestNode -> this.email.equals(other.email)
+            else -> false
+        }
+    }
 }

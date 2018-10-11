@@ -25,4 +25,14 @@ class LetStatement(letString: String): Statement(letString) {
     override fun interp() {
 
     }
+
+    override fun equals(other: Any?): Boolean {
+        return when (other) {
+            is LetStatement -> {
+                this.id.equals(other.id) &&
+                this.value.equals(other.value)
+            }
+            else -> false
+        }
+    }
 }

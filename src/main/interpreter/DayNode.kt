@@ -15,7 +15,7 @@ class DayNode(s: String) : Node(s) {
     val day = determineDay(s)
 
 
-    public override fun interp() {
+    override fun interp() {
         //TODO: implement
     }
 
@@ -23,6 +23,13 @@ class DayNode(s: String) : Node(s) {
         fun determineDay(dayString: String) : Day {
             //TODO: implement
             return Day.MONDAY
+        }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return when (other) {
+            is DayNode -> this.day.equals(other.day)
+            else -> false
         }
     }
 }

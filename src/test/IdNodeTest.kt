@@ -37,6 +37,13 @@ class IdNodeTest {
     }
 
     @Test
+    fun constructIdNode_single_character_with_spaces_before_and_after() {
+        var idString = "    \$X "
+        var idNode = IdNode(idString)
+        assertEquals("X", idNode.id)
+    }
+
+    @Test
     fun constructIdNode_missing_dollar_sign() {
         var idString = "x"
         val exception = assertThrows(ParseException::class.java) {

@@ -11,12 +11,14 @@ class NodeSet(initString: String) {
     lateinit var nodes: Array<String>
 
     init {
-        if (initString.length < 2 || initString.first() != '{' || initString.last() != '}') {
-            throw ParseException("Invalid string given to NodeSet: \"" + initString + "\"")
+        var trimmedInitString = initString.trim()
+
+        if (trimmedInitString.length < 2 || trimmedInitString.first() != '{' || trimmedInitString.last() != '}') {
+            throw ParseException("Invalid string given to NodeSet: \"" + trimmedInitString + "\"")
         }
 
         // Split the string into elements
-        nodes = initString.subSequence(1, initString.length-1).split(",").toTypedArray();
+        nodes = trimmedInitString.subSequence(1, trimmedInitString.length-1).split(",").toTypedArray();
 
         // Strip spaces from the end of each element
         for (i in nodes.indices) {

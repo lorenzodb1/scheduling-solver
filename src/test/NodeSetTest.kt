@@ -23,6 +23,13 @@ class NodeSetTest {
     }
 
     @Test
+    fun constructNodeSet_single_element_random_spacing() {
+        var nodeSetString = "  {January          }   "
+        var nodeSet = NodeSet(nodeSetString);
+        assertArrayEquals(arrayOf<String>("January"), nodeSet.nodes)
+    }
+
+    @Test
     fun constructNodeSet_multiple_elements() {
         var nodeSetString = "{January, 5pm, asdfasdf}"
         var nodeSet = NodeSet(nodeSetString);
@@ -45,7 +52,7 @@ class NodeSetTest {
 
     @Test
     fun constructNodeSet_multiple_elements_random_spacing() {
-        var nodeSetString = "{ January ,    5pm, asdfasdf}"
+        var nodeSetString = "   {January          ,    5pm, asdfasdf}   "
         var nodeSet = NodeSet(nodeSetString);
         assertArrayEquals(arrayOf<String>("January", "5pm", "asdfasdf"), nodeSet.nodes)
     }

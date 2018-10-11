@@ -5,12 +5,13 @@ class IdNode(val idString: String) : Node(idString) {
     lateinit var id: String;
 
     init {
+        var trimmedIdString = idString.trim()
         // TODO: check if reserved word?
-        if (idString.length < 2 || idString[0] != '$'){
-            throw ParseException("Invalid string given to IdNode: \"" + idString + "\"")
+        if (trimmedIdString.length < 2 || trimmedIdString[0] != '$'){
+            throw ParseException("Invalid string given to IdNode: \"" + trimmedIdString + "\"")
         }
 
-        id = idString.substring(1)
+        id = trimmedIdString.substring(1)
     }
 
     public override fun interp() {

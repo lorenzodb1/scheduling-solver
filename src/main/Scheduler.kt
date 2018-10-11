@@ -54,9 +54,9 @@ class Scheduler {
                 }
                 if (args.size == 2) {
                     try {
-                        writeFile(args[2], output)
+                        writeFile(args[1], output)
                     } catch (e: Exception) {
-                        println("Error in writing ICal data to file:")
+                        println("Error in writing ICal data to file ${args[1]}:")
                         e.printStackTrace()
                         return
                     }

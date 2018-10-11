@@ -9,21 +9,22 @@ class LetStatement(letString: String): Statement(letString) {
     lateinit var value: Node
 
     init {
-        val letStatementIterator = letString.split(STATEMENT_DIVIDER_REGEX).iterator()
-        val key = letStatementIterator.next()
-        while (letStatementIterator.hasNext()) {
-            if (isLetKey(key)) {
-                id = letStatementIterator.next()
-                val equals = letStatementIterator.next() //TODO - lorenzodb1: Assumption that the format is $X = 5
-                if (true) {
-                    //value = Node(letStatementIterator.next()) TODO - lorenzodb1 - Node is abstract!
-                }
-
-            }
-        }
+        // TODO: Properly init
+        id = ""
+        value = IdNode("\$X")
     }
 
     override fun interp() {
 
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return when (other) {
+            is LetStatement -> {
+                this.id.equals(other.id)
+                this.value.equals(other.value)
+            }
+            else -> false
+        }
     }
 }

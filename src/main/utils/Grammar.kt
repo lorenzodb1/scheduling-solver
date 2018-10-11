@@ -68,22 +68,19 @@ object Grammar {
         return idKey.startsWith("$")
     }
 
-    internal fun isAtKey (key: String): Boolean{
+    internal fun isAtKey(key: String): Boolean{
         return atKeys.indexOf(key) > -1
     }
 
-    internal fun isWithKey (key: String): Boolean{
+    internal fun isWithKey(key: String): Boolean{
         return withKeys.indexOf(key) > -1
     }
 
-    internal fun isMonthArray (key: String): Boolean{
+    internal fun isvalidMonth(key: String): Boolean{
         return monthArray.indexOf(key) > -1
     }
 
-    internal fun isDurationArray (key: String): Boolean{
+    internal fun isValidDuration(key: String): Boolean{
         return durationArray.indexOf(key) > -1
     }
-
-
 }
-

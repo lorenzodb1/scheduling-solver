@@ -31,7 +31,6 @@ class DateNode(dateString: String) : Node(dateString) {
                 month = dateIterator.next()
             }
 
-
         }
     }
 

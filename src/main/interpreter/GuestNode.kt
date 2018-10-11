@@ -9,7 +9,6 @@ class GuestNode(emailString: String) : Node(emailString) {
         val emailIterator = letString.split(STATEMENT_DIVIDER_REGEX).iterator()
         val key = emailIterator.next()
         while (email.hasNext()) {
-            
 
         }
         //TODO: validate emailString and initialize email

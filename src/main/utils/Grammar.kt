@@ -10,6 +10,7 @@ object Grammar {
     private val inKeys: Array<String> = arrayOf("IN")
     private val atKeys: Array<String> = arrayOf("AT")
     private val withKeys: Array<String> = arrayOf("WITH")
+    private val onKey: Array<String> = arrayOf("ON")
 
     //TODO - lorenzodb1: Make sure you require at least the first three char of a month
     private val monthArray: Array<String> = arrayOf("January",
@@ -82,5 +83,9 @@ object Grammar {
 
     internal fun isValidDuration(key: String): Boolean{
         return durationArray.indexOf(key) > -1
+    }
+
+    internal fun isOnKey(key: String): Boolean {
+        return onKey.indexOf(key) > -1
     }
 }

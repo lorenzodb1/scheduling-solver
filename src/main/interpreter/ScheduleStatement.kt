@@ -1,9 +1,12 @@
 package interpreter
 
 import utils.Constant.STATEMENT_DIVIDER_REGEX
-import utils.Grammar.isAtKey
+import utils.Grammar.isTimeKey
+import utils.Grammar.isLocationKey
+import utils.Grammar.isForKey
+import utils.Grammar.isOnKey
 import utils.Grammar.isScheduleKey
-import utils.Grammar.isWithKey
+import utils.Grammar.isMapKey
 
 class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
 
@@ -23,22 +26,15 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
         while (scheduleStatementIterator.hasNext()) {
             if (isScheduleKey(key)) {
                 description = scheduleStatementIterator.next()
-            }
-            if (isAtKey(scheduleStatementIterator.next())) {
+            } else if (isTimeKey(scheduleStatementIterator.next())) {
                 time = TimeNode(scheduleStatementIterator.next())
-            }
-            if(isForKey(scheduleStatementIterator.next())){ //"for"
+            } else if(isForKey(scheduleStatementIterator.next())){ //"for"
                 duration = DurationNode(scheduleStatementIterator.next())
-            }
-            if(isAtKey(scheduleStatementIterator.next())){ //"at"
-                location = scheduleStatementIterator.next()
-            }
-            if(isOnKey(scheduleStatementIterator.next())){
+            } else if(isLocationKey(scheduleStatementIterator.next())){ //"in"
+                location = LocationNode(scheduleStatementIterator.next())
+            } else if(isOnKey(scheduleStatementIterator.next())){
                 dates = arrayOf(DateNode(scheduleStatementIterator.next()))
-            }
-
-            //this is a unit - parsing by words doesn't really mean anything
-            if (isWithKey(scheduleStatementIterator.next())) {
+            } else if (isMapKey(scheduleStatementIterator.next())) { //this is a unit - parsing by words doesn't really mean anything
                 guests = arrayOf(GuestNode(scheduleStatementIterator.next()))
             }
         }

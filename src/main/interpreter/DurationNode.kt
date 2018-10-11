@@ -1,32 +1,35 @@
 package interpreter
 
-class DurationNode(s: String) : Node(s) {
+import utils.Constant.STATEMENT_DIVIDER_REGEX
+import utils.Grammar.isValidDuration
+
+class DurationNode(durationString: String) : Node(durationString) {
     var seconds: Int = 0
 
     //DURATION := <Num> (hours|minutes|seconds)
 
     init {
-        val durationIterator = letString.split(STATEMENT_DIVIDER_REGEX).iterator()
-        val key = durationIterator.next()
+        val durationIterator = durationString.split(STATEMENT_DIVIDER_REGEX).iterator()
+        val key: String = durationIterator.next()
         while (durationIterator.hasNext()) {
-            if (isDigit(key)) {
-                val digit = key
+            val digit = key.toIntOrNull()
+            if (digit == null) {
+                //TODO - lorenzodb1: Throw exception
             }
-            val magnitude = durationIterator.next();
-            if(isDurationArray(magnitude) {
-                        if (magnitude == "seconds") {
-                            seconds = digit
-                        } else if (magnitude == "minutes") {
-                            seconds = (digit * 60)
-                        } else if (magnitude == "hours") {
-                            seconds = (digit * 3600)
-                        }
-                    }
-
+            val magnitude = durationIterator.next()
+            if(isValidDuration(magnitude)) {
+                if (magnitude == "seconds") {
+                    seconds = digit!!
+                } else if (magnitude == "minutes") {
+                    seconds = (digit!! * 60)
+                } else if (magnitude == "hours") {
+                    seconds = (digit!! * 3600)
+                }
+            }
         }
     }
 
-    public override fun interp() {
+    override fun interp() {
         //TODO: implement
     }
 }

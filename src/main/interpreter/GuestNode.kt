@@ -6,15 +6,15 @@ class GuestNode(emailString: String) : Node(emailString) {
     lateinit var email: String
 
     init {
-        val emailIterator = letString.split(STATEMENT_DIVIDER_REGEX).iterator()
+        val emailIterator = emailString.split(STATEMENT_DIVIDER_REGEX).iterator()
         val key = emailIterator.next()
-        while (email.hasNext()) {
+        while (emailIterator.hasNext()) {
 
         }
         //TODO: validate emailString and initialize email
     }
 
-    public override fun interp() {
+    override fun interp() {
         //TODO: implement
     }
 }

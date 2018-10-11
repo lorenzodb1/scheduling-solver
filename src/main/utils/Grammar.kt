@@ -8,8 +8,9 @@ object Grammar {
     private val scheduleStatementKeys: Array<String> = arrayOf("SCHEDULE")
     private val allStatementKeys: Array<String> = letStatementKeys + forStatementKeys + scheduleStatementKeys
     private val inKeys: Array<String> = arrayOf("IN")
-    private val atKeys: Array<String> = arrayOf("AT")
-    private val withKeys: Array<String> = arrayOf("WITH")
+    private val timeKeys: Array<String> = arrayOf("AT")
+    private val locationKeys: Array<String> = arrayOf("IN")
+    private val mapKeys: Array<String> = arrayOf("WITH")
     private val onKey: Array<String> = arrayOf("ON")
 
     //TODO - lorenzodb1: Make sure you require at least the first three char of a month
@@ -69,12 +70,16 @@ object Grammar {
         return idKey.startsWith("$")
     }
 
-    internal fun isAtKey(key: String): Boolean{
-        return atKeys.indexOf(key) > -1
+    internal fun isTimeKey(key: String): Boolean{
+        return timeKeys.indexOf(key) > -1
     }
 
-    internal fun isWithKey(key: String): Boolean{
-        return withKeys.indexOf(key) > -1
+    internal fun isLocationKey(key: String): Boolean{
+        return locationKeys.indexOf(key) > -1
+    }
+
+    internal fun isMapKey(key: String): Boolean{
+        return mapKeys.indexOf(key) > -1
     }
 
     internal fun isvalidMonth(key: String): Boolean{

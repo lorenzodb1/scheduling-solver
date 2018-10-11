@@ -12,6 +12,9 @@ class StatementList(statement: String) {
     lateinit var statements: MutableList<Statement>
 
     init {
+        // TODO: Properly init
+        statements = arrayListOf()
+
         val statementIterator: Iterator<String> = statement.split(STATEMENT_DIVIDER_REGEX).iterator()
         var key: String = statementIterator.next()
         while (statementIterator.hasNext()) {
@@ -48,5 +51,12 @@ class StatementList(statement: String) {
 
     fun interp() {
 
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return when (other) {
+            is StatementList -> this.statements.equals(other.statements)
+            else -> false
+        }
     }
 }

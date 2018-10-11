@@ -13,28 +13,15 @@ class ForStatement(forString: String) : Statement(forString) {
     lateinit var statements: StatementList
 
     init {
+        // TODO: Delete these, just setting so it compiles
+        id = IdNode("");
+        nodeSet = NodeSet("");
+        statements = StatementList("");
+
         val forStatementIterator: Iterator<String> = forString.split(STATEMENT_DIVIDER_REGEX).iterator()
         val key: String = forStatementIterator.next()
         while (forStatementIterator.hasNext()) {
-            if (isForKey(key)) {
-                val idKey = forStatementIterator.next()
-                if (isValidId(idKey)) {
-                    id = IdNode(idKey)
-                }
-                else {
-                    //TODO - lorenzodb1: Throw exception
-                }
-                val inKey: String = forStatementIterator.next()
-                if (isInKey(inKey)) {
-                    val rangeString: String = forStatementIterator.next()
-                    nodeSet = NodeSet(rangeString) //TODO - lorenzodb1: Are brackets included in rangeString?
-                }
-                val forLoopBody = StringBuilder("")
-                while (forStatementIterator.hasNext()) {
-                    forLoopBody.append(forStatementIterator.next())
-                }
-                statements = StatementList(forLoopBody.toString())
-            }
+            println(forStatementIterator.next())
         }
     }
 

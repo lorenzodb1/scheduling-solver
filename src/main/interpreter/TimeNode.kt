@@ -17,4 +17,14 @@ class TimeNode(timeString: String) : Node(timeString) {
     public override fun interp() {
         //TODO: implement
     }
+
+    override fun equals(other: Any?): Boolean {
+        return when (other) {
+            is TimeNode -> {
+                this.hour.equals(other.hour) &&
+                this.minute.equals(other.minute)
+            }
+            else -> false
+        }
+    }
 }

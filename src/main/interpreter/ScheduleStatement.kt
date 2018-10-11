@@ -28,12 +28,12 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
     override fun equals(other: Any?): Boolean {
         return when (other) {
             is ScheduleStatement -> {
-                this.description.equals(other.description)
-                this.time.equals(other.time)
-                this.duration.equals(other.duration)
-                this.location.equals(other.location)
-                this.dates.equals(other.dates)
-                this.guests.equals(other.guests)
+                this.description.equals(other.description) &&
+                this.time.equals(other.time) &&
+                this.duration.equals(other.duration) &&
+                this.location.equals(other.location) &&
+                this.dates.contentDeepEquals(other.dates) &&
+                this.guests.contentDeepEquals(other.guests)
             }
             else -> false
         }

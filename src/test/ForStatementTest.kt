@@ -64,7 +64,7 @@ class ForStatementTest {
         var forStatement = ForStatement(forString);
 
         assertEquals(IdNode("\$X"), forStatement.id)
-        assertEquals(NodeSet("{5pm"), forStatement.nodeSet)
+        assertEquals(NodeSet("{5pm}"), forStatement.nodeSet)
         assertEquals(StatementList("SCHEDULE dinner AT 7pm"), forStatement.statements);
     }
 
@@ -76,7 +76,7 @@ class ForStatementTest {
         var forStatement = ForStatement(forString);
 
         assertEquals(IdNode("\$X"), forStatement.id)
-        assertEquals(NodeSet("{5pm"), forStatement.nodeSet)
+        assertEquals(NodeSet("{5pm}"), forStatement.nodeSet)
         assertEquals(StatementList("SCHEDULE dinner AT 5pm"), forStatement.statements);
     }
 
@@ -124,7 +124,7 @@ class ForStatementTest {
         var forStatement = ForStatement(forString);
 
         assertEquals(IdNode("\$X"), forStatement.id)
-        assertEquals(NodeSet("{5pm, 6pm"), forStatement.nodeSet)
+        assertEquals(NodeSet("{5pm, 6pm}"), forStatement.nodeSet)
         assertEquals(StatementList("SCHEDULE dinner AT 5pm SCHEDULE dinner AT 6pm"),
                 forStatement.statements);
     }
@@ -136,7 +136,7 @@ class ForStatementTest {
         var forStatement = ForStatement(forString);
 
         assertEquals(IdNode("\$X"), forStatement.id)
-        assertEquals(NodeSet("{5pm, 6pm"), forStatement.nodeSet)
+        assertEquals(NodeSet("{5pm, 6pm}"), forStatement.nodeSet)
         assertEquals(StatementList("FOR \$Y IN {dinner, lunch} DO SCHEDULE dinner AT 5pm ENDFOR FOR \$Y IN {dinner, lunch} DO SCHEDULE dinner AT 6pm ENDFOR"),
                 forStatement.statements);
     }
@@ -148,7 +148,7 @@ class ForStatementTest {
         var forStatement = ForStatement(forString);
 
         assertEquals(IdNode("\$X"), forStatement.id)
-        assertEquals(NodeSet("{5pm, 6pm"), forStatement.nodeSet)
+        assertEquals(NodeSet("{5pm, 6pm}"), forStatement.nodeSet)
         assertEquals(StatementList("FOR \$X IN {3pm, 4pm} DO SCHEDULE dinner AT \$X ENDFOR FOR \$X IN {3pm, 4pm} DO SCHEDULE dinner AT \$X ENDFOR"),
                 forStatement.statements);
     }

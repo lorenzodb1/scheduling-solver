@@ -29,3 +29,6 @@ SCHEDULE := SCHEDULE <NODE> AT <NODE> [FOR <NODE>] [AT LOCATION <NODE>] [ON [EVE
 - Ideas from TA
     - (variables) `Guests -> x -> asdaf@adfa.com, asdfasd@bbbb.com, ...`
     - Segregate events so that guests can't see each other?
+
+## Notes for Video
+- include "Rational Reconstruction": comparison of making a schedule in google calendar vs doing it in our language

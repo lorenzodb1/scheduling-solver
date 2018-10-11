@@ -8,6 +8,18 @@ import org.junit.jupiter.api.TestInstance
 @TestInstance(TestInstance.Lifecycle.PER_CLASS) // This annotation is required for @BeforeAll to work
 class ForStatementTest {
 
+    // Test constructing a simple FOR loop with an empty Nodeset and no statements
+    @Test
+    fun constructForStatement_empty_nodeset_and_empty_statements() {
+        var forString = "FOR \$X IN {} ENDFOR\n"
+
+        var forStatement = ForStatement(forString);
+
+        assertEquals(IdNode("\$X"), forStatement.id)
+        assertEquals(NodeSet("{}"), forStatement.nodeSet)
+        assertEquals(StatementList(""), forStatement.statements);
+    }
+
     // Test constructing a simple FOR loop with an empty Nodeset
     @Test
     fun constructForStatement_empty_nodeset() {
@@ -16,7 +28,7 @@ class ForStatementTest {
         var forStatement = ForStatement(forString);
 
         assertEquals(IdNode("\$X"), forStatement.id)
-        assertEquals(NodeSet("{5pm"), forStatement.nodeSet)
+        assertEquals(NodeSet("{}"), forStatement.nodeSet)
         assertEquals(StatementList(""), forStatement.statements);
     }
 
@@ -28,7 +40,7 @@ class ForStatementTest {
         var forStatement = ForStatement(forString);
 
         assertEquals(IdNode("\$X"), forStatement.id)
-        assertEquals(NodeSet("{5pm"), forStatement.nodeSet)
+        assertEquals(NodeSet("{5pm}"), forStatement.nodeSet)
         assertEquals(StatementList("SCHEDULE dinner AT 7pm"), forStatement.statements);
     }
 

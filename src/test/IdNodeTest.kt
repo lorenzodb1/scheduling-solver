@@ -8,18 +8,6 @@ import org.junit.jupiter.api.TestInstance
 @TestInstance(TestInstance.Lifecycle.PER_CLASS) // This annotation is required for @BeforeAll to work
 class IdNodeTest {
 
-    // Test constructing a simple FOR loop with an empty Nodeset and no statements
-//    @Test
-//    fun constructForStatement_empty_nodeset_and_empty_statements() {
-//        var forString = "FOR \$X IN {} ENDFOR\n"
-//
-//        var forStatement = ForStatement(forString);
-//
-//        assertEquals(IdNode("\$X"), forStatement.id)
-//        assertEquals(NodeSet("{}"), forStatement.nodeSet)
-//        assertEquals(StatementList(""), forStatement.statements);
-//    }
-
     @Test
     fun constructIdNode_single_character_uppercase() {
         var idString = "\$X"

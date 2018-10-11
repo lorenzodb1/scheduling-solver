@@ -21,7 +21,7 @@ class LetStatement(letString: String): Statement(letString) {
     override fun equals(other: Any?): Boolean {
         return when (other) {
             is LetStatement -> {
-                this.id.equals(other.id)
+                this.id.equals(other.id) &&
                 this.value.equals(other.value)
             }
             else -> false

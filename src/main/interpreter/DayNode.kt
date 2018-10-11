@@ -25,4 +25,11 @@ class DayNode(s: String) : Node(s) {
             return Day.MONDAY
         }
     }
+
+    override fun equals(other: Any?): Boolean {
+        return when (other) {
+            is DayNode -> this.day.equals(other.day)
+            else -> false
+        }
+    }
 }

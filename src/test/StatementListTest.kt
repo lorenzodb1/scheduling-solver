@@ -39,7 +39,10 @@ class StatementListTest {
                 ScheduleStatement("SCHEDULE dinner AT \$X")
         ).toTypedArray();
         var actualStatements = statementList.statements.toTypedArray()
-        assertTrue(expectedStatements.contentDeepEquals(actualStatements))
+        //assertTrue(expectedStatements.contentEquals(actualStatements))
+        assertArrayEquals(mutableListOf(
+                ScheduleStatement("SCHEDULE dinner AT \$X")
+        ).toTypedArray(), statementList.statements.toTypedArray())
     }
 
     @Test
@@ -64,8 +67,28 @@ class StatementListTest {
         ).toTypedArray(), statementList.statements.toTypedArray())
     }
 
-    // TODO: Test nested FOR loops
+    @Test
+    fun constructStatementList_nested_FOR_loops() {
+        var statementListString = "FOR \$X IN {5pm, 6pm} DO FOR \$Y IN {dinner, lunch} SCHEDULE \$Y AT \$X ENDFOR ENDFOR"
+        var statementList = StatementList(statementListString)
+        assertArrayEquals(mutableListOf<Statement>(
+                ForStatement("FOR \$X IN {5pm, 6pm} DO FOR \$Y IN {dinner, lunch} SCHEDULE \$Y AT \$X ENDFOR ENDFOR")
+        ).toTypedArray(), statementList.statements.toTypedArray())
+    }
 
-    // TODO: Test unmatched FOR
-    // TODO: Test unmatched ENDFOR
+    @Test
+    fun constructStatementList_unmatched_FOR() {
+        var statementListString = "FOR \$X IN {5pm, 6pm} DO SCHEDULE dinner AT \$X"
+        val exception = assertThrows(ParseException::class.java) {
+            StatementList(statementListString)
+        }
+    }
+
+    @Test
+    fun constructStatementList_unmatched_ENDFOR() {
+        var statementListString = "FOR \$X IN {5pm, 6pm} DO SCHEDULE dinner AT \$X"
+        val exception = assertThrows(ParseException::class.java) {
+            StatementList(statementListString)
+        }
+    }
 }

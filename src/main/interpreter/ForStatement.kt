@@ -30,8 +30,8 @@ class ForStatement(forString: String) : Statement(forString) {
     override fun equals(other: Any?): Boolean {
         return when (other) {
             is ForStatement -> {
-                this.id.equals(other.id)
-                this.nodeSet.equals(other.nodeSet)
+                this.id.equals(other.id) &&
+                this.nodeSet.equals(other.nodeSet) &&
                 this.statements.equals(other.statements)
             }
             else -> false

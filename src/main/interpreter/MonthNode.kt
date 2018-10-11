@@ -30,4 +30,11 @@ class MonthNode(s: String) : Node(s) {
             return Month.JANUARY
         }
     }
+
+    override fun equals(other: Any?): Boolean {
+        return when (other) {
+            is MonthNode -> this.month.equals(other.month)
+            else -> false
+        }
+    }
 }

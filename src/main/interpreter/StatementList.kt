@@ -42,9 +42,8 @@ class StatementList(statementsString: String) {
                         buildAndAddStatement(tokens, startOfCurrentStatementIndex, currentIndex, currentStatementType)
                         currentStatementType = StatementType.FOR
                         startOfCurrentStatementIndex = currentIndex;
-                    } else {
-                        forStatementDepth++
                     }
+                    forStatementDepth++
                 }
                 "ENDFOR" -> {
                     forStatementDepth--
@@ -61,6 +60,9 @@ class StatementList(statementsString: String) {
                 }
             }
         }
+        // Since we've stopped iterating, we're at the end of the list, build a statement with
+        // anything left at the end of the string
+        buildAndAddStatement(tokens, startOfCurrentStatementIndex, tokens.lastIndex+1, currentStatementType)
 
         // Check for unmatched FOR, ENDFOR statements
         if (forStatementDepth > 0) {
@@ -69,9 +71,6 @@ class StatementList(statementsString: String) {
             throw ParseException("Found ENDFOR with no matching FOR in: \"$statementsString\"")
         }
 
-        // Since we've stopped iterating, we're at the end of the list, build a statement with
-        // anything left at the end of the string
-        buildAndAddStatement(tokens, startOfCurrentStatementIndex, tokens.lastIndex, currentStatementType)
     }
 
     fun buildAndAddStatement(tokens: List<String>,
@@ -83,13 +82,17 @@ class StatementList(statementsString: String) {
 
         // Build the statement from the given range in the tokens
         var statementTokens = tokens.subList(startIndex, endIndex)
-        var statementString = statementTokens.joinToString()
+        var statementString = statementTokens.joinToString(" ")
+
+        // Check for empty statement
+        if (statementString.trim() == "") return
 
         var statement: Statement = when (statementType) {
             StatementType.LET -> LetStatement(statementString)
             StatementType.SCHEDULE -> ScheduleStatement(statementString)
             StatementType.FOR -> ForStatement(statementString)
-            else -> throw ParseException("Invalid StatementType matched in StatementList: \"$statementType\"")
+            else -> throw ParseException("Invalid StatementType matched in StatementList: \"$statementType\" " +
+                    "(NOTE: This probably means something is wrong with the code")
         }
 
         statements.add(statement)

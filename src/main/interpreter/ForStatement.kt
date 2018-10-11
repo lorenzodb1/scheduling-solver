@@ -1,11 +1,5 @@
 package interpreter
 
-import utils.Constant.STATEMENT_DIVIDER_REGEX
-import utils.Grammar.isForKey
-import utils.Grammar.isInKey
-import utils.Grammar.isValidId
-
-
 class ForStatement(forString: String) : Statement(forString) {
 
     lateinit var id: IdNode
@@ -13,16 +7,20 @@ class ForStatement(forString: String) : Statement(forString) {
     lateinit var statements: StatementList
 
     init {
-        // TODO: Delete these, just setting so it compiles
-        id = IdNode("");
-        nodeSet = NodeSet("");
-        statements = StatementList("");
+        var trimmedForString = forString.trim()
 
-        val forStatementIterator: Iterator<String> = forString.split(STATEMENT_DIVIDER_REGEX).iterator()
-        val key: String = forStatementIterator.next()
-        while (forStatementIterator.hasNext()) {
-            println(forStatementIterator.next())
+        // Split on keywords
+        var forStringSplit = trimmedForString.split("FOR", "IN", "ENDFOR", "DO");
+        if ( forStringSplit.size < 5 || forStringSplit.first() != "" || forStringSplit.last() != ""){
+            throw ParseException("Invalid string given to ForStatement: \"$forString\"")
         }
+
+        // Remove empty start/end strings
+        forStringSplit = forStringSplit.subList(1, forStringSplit.lastIndex)
+
+        id = IdNode(forStringSplit[0])
+        nodeSet = NodeSet(forStringSplit[1])
+        statements = StatementList(forStringSplit[2])
     }
 
     override fun interp() {

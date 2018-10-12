@@ -95,4 +95,6 @@ class NodeSetTest {
             NodeSet(nodeSetString);
         }
     }
+
+    // TODO: Case with a few elements with no spaces
 }

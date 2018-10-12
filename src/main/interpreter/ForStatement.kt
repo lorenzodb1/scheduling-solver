@@ -7,20 +7,137 @@ class ForStatement(forString: String) : Statement(forString) {
     lateinit var statements: StatementList
 
     init {
-        var trimmedForString = forString.trim()
+        val tokens = forString.split(" ");
+        val tokensIter = tokens.iterator().withIndex();
 
-        // Split on keywords
-        var forStringSplit = trimmedForString.split("FOR", "IN", "ENDFOR", "DO");
-        if ( forStringSplit.size < 5 || forStringSplit.first() != "" || forStringSplit.last() != ""){
-            throw ParseException("Invalid string given to ForStatement: \"$forString\"")
+        // Check for starting FOR
+        if (!iterateOverWhitespace(tokensIter, "FOR")) {
+            throw ParseException("Missing \"FOR\" at start of string given to ForStatement: \"$forString\"")
         }
 
-        // Remove empty start/end strings
-        forStringSplit = forStringSplit.subList(1, forStringSplit.lastIndex)
+        // Get the Id
+        var nextNonWhitespaceToken = iterateOverWhitespace(tokensIter)
+        when (nextNonWhitespaceToken) {
+            null -> throw ParseException("No id in string given to ForStatement: \"$forString\"")
+            else -> {
+                id = IdNode(nextNonWhitespaceToken.value)
+            }
+        }
 
-        id = IdNode(forStringSplit[0])
-        nodeSet = NodeSet(forStringSplit[1])
-        statements = StatementList(forStringSplit[2])
+        // Check that next word is "IN"
+        if (!iterateOverWhitespace(tokensIter, "IN")) {
+            throw ParseException("Missing \"IN\" in string given to ForStatement: \"$forString\"")
+        }
+
+        // Start of NodeSet
+        nextNonWhitespaceToken = iterateOverWhitespace(tokensIter);
+        if (nextNonWhitespaceToken == null) {
+            throw ParseException("Missing Nodeset in string given to ForStatement: \"$forString\"")
+        }
+        val nodesetStartIndex = nextNonWhitespaceToken.index
+        val nodesetStartToken = nextNonWhitespaceToken.value
+        if (nodesetStartToken.length < 1 || nodesetStartToken.trim().first() != '{') {
+            throw ParseException("Invalid NodeSet in string given to ForStatement: \"$forString\"")
+        }
+
+        // In case there are nested Nodesets, track our depth
+        var nodesetDepth = 0;
+        var currIndex = nodesetStartIndex
+        var currToken = tokens[nodesetStartIndex]
+        while (tokensIter.hasNext()) {
+            val trimmedToken = currToken.trim()
+            if (trimmedToken.length > 0 && trimmedToken.first() == '{') {
+                nodesetDepth++
+            }
+            if (trimmedToken.length > 0 && trimmedToken.last() == '}') {
+                nodesetDepth--
+            }
+            if (nodesetDepth == 0) {
+                currIndex++
+                break
+            }
+            val nextIndexAndToken = tokensIter.next()
+            currIndex = nextIndexAndToken.index
+            currToken = nextIndexAndToken.value
+        }
+        val nodeSetEndIndex = currIndex
+
+        // Check if we went all the way to the end (nodeset was opened but not closed)
+        if (!tokensIter.hasNext()) {
+            throw ParseException("NodeSet not closed in string given to ForStatement: \"$forString\"")
+        }
+
+        // Construct our Nodeset
+        nodeSet = NodeSet(tokens.subList(nodesetStartIndex, nodeSetEndIndex).joinToString(" "))
+
+        // Check that next word is "DO"
+        if (!iterateOverWhitespace(tokensIter, "DO")) {
+            throw ParseException("Missing \"DO\" in string given to ForStatement: \"$forString\"")
+        }
+
+        // Start of statements
+        var numTokensInStatements = 0
+        var forStatementDepth = 1
+        currIndex = -1
+        var currentToken = ""
+        loop@ while (tokensIter.hasNext()) {
+            var currIndexAndToken = tokensIter.next()
+            currIndex = currIndexAndToken.index
+            currToken = currIndexAndToken.value
+            numTokensInStatements++
+            when (currToken.trim()) {
+                "FOR" -> forStatementDepth++
+                "ENDFOR" -> {
+                    forStatementDepth--
+                    if (forStatementDepth == 0) {
+                        break@loop;
+                    }
+                }
+            }
+        }
+        val statementsEndIndex = currIndex
+
+        // Check for unmatched FOR, ENDFOR statements
+        if (forStatementDepth > 0 || tokens[currIndex].trim() != "ENDFOR") {
+            throw ParseException("Found FOR with no matching ENDFOR in: \"$forString\"")
+        } else if (forStatementDepth < 0) {
+            throw ParseException("Found ENDFOR with no matching FOR in: \"$forString\"")
+        }
+
+        statements = StatementList(tokens.subList(
+                statementsEndIndex - numTokensInStatements+1,
+                statementsEndIndex).joinToString(" "))
+    }
+
+    /**
+     * Keeps iterating until it hits a non-empty string or the end
+     *
+     * If the non-empty string is the given keyword (ignoring leading and trailing spaces),
+     * then returns true, else returns false
+     */
+    private fun iterateOverWhitespace(iter: Iterator<IndexedValue<String>>, keyword: String): Boolean {
+        while (iter.hasNext()){
+            var currentToken = iter.next().value
+            if (currentToken.trim() != "") {
+                return currentToken.trim() == keyword
+            }
+        }
+        return false
+    }
+
+    /**
+     * Keeps iterating until it hits a non-empty string or the end
+     *
+     * Returns the first non-empty string with the index (index, token) or null if at the end
+     */
+    private fun iterateOverWhitespace(iter: Iterator<IndexedValue<String>>): IndexedValue<String>? {
+        while (iter.hasNext()) {
+            var (currentIndex, currentToken) = iter.next()
+            if (currentToken.trim() != "") {
+                return IndexedValue(currentIndex, currentToken)
+            }
+        }
+        return null
     }
 
     override fun interp() {

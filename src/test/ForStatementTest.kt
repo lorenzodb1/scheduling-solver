@@ -22,7 +22,7 @@ class ForStatementTest {
     // Test constructing a simple FOR loop with an empty Nodeset and no statements
     @Test
     fun constructForStatement_empty_nodeset_and_empty_statements_wierd_spacing() {
-        var forString = "FOR \$X IN    {} DO ENDFOR  "
+        var forString = "   FOR    \$X    IN    {}  DO     ENDFOR  "
 
         var forStatement = ForStatement(forString);
 
@@ -40,7 +40,7 @@ class ForStatementTest {
 
         assertEquals(IdNode("\$X"), forStatement.id)
         assertEquals(NodeSet("{}"), forStatement.nodeSet)
-        assertEquals(StatementList(""), forStatement.statements);
+        assertEquals(StatementList("SCHEDULE dinner AT 7pm"), forStatement.statements);
     }
 
     // Test constructing a simple FOR loop, where the id isn't used in the body
@@ -136,7 +136,7 @@ class ForStatementTest {
 
         assertEquals(IdNode("\$X"), forStatement.id)
         assertEquals(NodeSet("{5pm, 6pm}"), forStatement.nodeSet)
-        assertEquals(StatementList("FOR \$Y IN {dinner, lunch} DO SCHEDULE dinner AT 5pm ENDFOR FOR \$Y IN {dinner, lunch} DO SCHEDULE dinner AT 6pm ENDFOR"),
+        assertEquals(StatementList("FOR \$Y IN {dinner, lunch} DO SCHEDULE dinner AT \$Y ENDFOR"),
                 forStatement.statements);
     }
 
@@ -148,7 +148,7 @@ class ForStatementTest {
 
         assertEquals(IdNode("\$X"), forStatement.id)
         assertEquals(NodeSet("{5pm, 6pm}"), forStatement.nodeSet)
-        assertEquals(StatementList("FOR \$X IN {3pm, 4pm} DO SCHEDULE dinner AT \$X ENDFOR FOR \$X IN {3pm, 4pm} DO SCHEDULE dinner AT \$X ENDFOR"),
+        assertEquals(StatementList("FOR \$X IN {3pm, 4pm} DO SCHEDULE dinner AT \$X ENDFOR"),
                 forStatement.statements);
     }
 
@@ -188,4 +188,5 @@ class ForStatementTest {
         }
     }
 
+    // TODO: test nested nodesets
 }

@@ -69,10 +69,10 @@ class StatementListTest {
 
     @Test
     fun constructStatementList_nested_FOR_loops() {
-        var statementListString = "FOR \$X IN {5pm, 6pm} DO FOR \$Y IN {dinner, lunch} SCHEDULE \$Y AT \$X ENDFOR ENDFOR"
+        var statementListString = "FOR \$X IN {5pm, 6pm} DO FOR \$Y IN {dinner, lunch} DO SCHEDULE \$Y AT \$X ENDFOR ENDFOR"
         var statementList = StatementList(statementListString)
         assertArrayEquals(mutableListOf<Statement>(
-                ForStatement("FOR \$X IN {5pm, 6pm} DO FOR \$Y IN {dinner, lunch} SCHEDULE \$Y AT \$X ENDFOR ENDFOR")
+                ForStatement("FOR \$X IN {5pm, 6pm} DO FOR \$Y IN {dinner, lunch} DO SCHEDULE \$Y AT \$X ENDFOR ENDFOR")
         ).toTypedArray(), statementList.statements.toTypedArray())
     }
 

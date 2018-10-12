@@ -15,7 +15,7 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
     init {
         // TODO: Properly init
         description = ""
-        time = TimeNode("")
+        time = TimeNode("5pm")
         duration = DurationNode("")
         location = LocationNode("")
         dates = arrayOf<DateNode>()

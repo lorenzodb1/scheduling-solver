@@ -13,7 +13,7 @@
 [x] NODESET := {<NODE> (, <NODE>)*}
 [ ] LET := LET <ID> = (<NODE>|<NODESET>)
 [x] FOR := FOR <ID> IN <NODESET> <STATEMENT>* ENDFOR
-[ ] MONTH := January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept|Oct|Nov|Dec
+[x] MONTH := January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept|Oct|Nov|Dec|january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sept|oct|nov|dec|
 [ ] DATE := <MONTH> <Num>[st|th] | <Num>[st|th] OF <MONTH>
 [ ] DAY := Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|Mon|Tues|Wed|Thur|Fri|Sat|Sun|<DATE>
 [ ] DURATION := <Num> (hours|minutes|seconds)

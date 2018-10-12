@@ -27,28 +27,35 @@ class DayNodeTest {
     }
 
     @Test
-    fun constructIdNode_lower_case_monday() {
+    fun constructDayNode_lower_case_monday() {
         val dayString = "monday"
         var dayNode = DayNode(dayString)
         assertEquals(DayNode.Companion.Day.MONDAY, dayNode.day)
     }
 
     @Test
-    fun constructIdNode_lower_case_monday_abbreviated() {
+    fun constructDayNode_wierd_spacing() {
+        val dayString = "   monday   "
+        var dayNode = DayNode(dayString)
+        assertEquals(DayNode.Companion.Day.MONDAY, dayNode.day)
+    }
+
+    @Test
+    fun constructDayNode_lower_case_monday_abbreviated() {
         val dayString = "mon"
         var dayNode = DayNode(dayString)
         assertEquals(DayNode.Companion.Day.MONDAY, dayNode.day)
     }
 
     @Test
-    fun constructIdNode_upper_case_monday() {
+    fun constructDayNode_upper_case_monday() {
         val dayString = "Monday"
         var dayNode = DayNode(dayString)
         assertEquals(DayNode.Companion.Day.MONDAY, dayNode.day)
     }
 
     @Test
-    fun constructIdNode_lower_case_wednesday() {
+    fun constructDayNode_lower_case_wednesday() {
         val dayString = "wednesday"
         var dayNode = DayNode(dayString)
         assertEquals(DayNode.Companion.Day.WEDNESDAY, dayNode.day)

@@ -34,6 +34,13 @@ class MonthNodeTest {
     }
 
     @Test
+    fun constructIdNode_wierd_spacing() {
+        val monthString = "   january  "
+        var monthNode = MonthNode(monthString)
+        assertEquals(MonthNode.Companion.Month.JANUARY, monthNode.month)
+    }
+
+    @Test
     fun constructIdNode_lower_case_january_abbreviated() {
         val monthString = "jan"
         var monthNode = MonthNode(monthString)

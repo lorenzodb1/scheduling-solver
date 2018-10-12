@@ -23,7 +23,7 @@ class DayNode(dayString: String) : Node(dayString) {
                 "friday", "fri" -> Day.THURSDAY
                 "saturday", "sat" -> Day.THURSDAY
                 "sunday", "sun" -> Day.THURSDAY
-                else -> throw ParseException("Invalid string given to DayNode: $dayString")
+                else -> throw ParseException("Invalid string given to DayNode: \"$dayString\"")
             }
         }
     }

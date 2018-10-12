@@ -17,7 +17,7 @@ class MonthNode(monthString: String) : Node(monthString) {
                 "october", "oct" -> Month.OCTOBER
                 "november", "nov" -> Month.NOVEMBER
                 "december", "dec" -> Month.DECEMBER
-                else -> throw ParseException("Invalid string given to MonthNode: $monthString")
+                else -> throw ParseException("Invalid string given to MonthNode: \"$monthString\"")
             }
         }
 

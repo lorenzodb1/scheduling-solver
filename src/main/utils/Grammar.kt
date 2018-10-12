@@ -75,7 +75,5 @@ object Grammar {
     internal fun isWithKey (key: String): Boolean{
         return withKeys.indexOf(key) > -1
     }
-
-
 }
 

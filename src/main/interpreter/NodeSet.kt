@@ -8,10 +8,10 @@ class NodeSet(initString: String) {
 
     // We actually just store each "node" as a string, and rely on parsing after we
     // substitute it in to catch errors
-    lateinit var nodes: Array<String>
+    var nodes: Array<String>
 
     init {
-        var trimmedInitString = initString.trim()
+        val trimmedInitString = initString.trim()
 
         if (trimmedInitString.length < 2 || trimmedInitString.first() != '{' || trimmedInitString.last() != '}') {
             throw ParseException("Invalid string given to NodeSet: \"" + trimmedInitString + "\"")

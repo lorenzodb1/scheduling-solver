@@ -2,13 +2,13 @@ package interpreter
 
 class IdNode(val idString: String) : Node(idString) {
 
-    lateinit var id: String;
+    var id: String;
 
     init {
-        var trimmedIdString = idString.trim()
+        val trimmedIdString = idString.trim()
         // TODO: check if reserved word?
         if (trimmedIdString.length < 2 || trimmedIdString[0] != '$'){
-            throw ParseException("Invalid string given to IdNode: \"" + trimmedIdString + "\"")
+            throw ParseException("Invalid string given to IdNode: \"$trimmedIdString\"")
         }
 
         id = trimmedIdString.substring(1)

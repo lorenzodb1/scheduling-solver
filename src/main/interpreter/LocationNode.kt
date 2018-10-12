@@ -3,11 +3,10 @@ package interpreter
 class LocationNode(locationString: String) : Node(locationString) {
 
     // TODO: determine proper datatype to represent location
-    lateinit var location: String;
+    var location: String = ""
 
     init {
         // TODO: Properly init (do we even want to parse this??)
-        location = ""
     }
 
     override fun interp() {

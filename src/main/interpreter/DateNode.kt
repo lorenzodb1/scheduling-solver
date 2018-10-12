@@ -4,7 +4,7 @@ import utils.Grammar.isvalidMonth
 
 class DateNode(dateString: String) : Node(dateString) {
 
-    lateinit var month: MonthNode
+    var month: MonthNode? = null
     var dayOfMonth: Int = 0 //TODO: make into a node?
 
     //form: <MONTH> <Num>[st|nd|rd|th] | <Num>[st|nd|rd|th] OF <MONTH>
@@ -34,8 +34,8 @@ class DateNode(dateString: String) : Node(dateString) {
     override fun equals(other: Any?): Boolean {
         return when (other) {
             is DateNode -> {
-                this.month.equals(other.month) &&
-                this.dayOfMonth.equals(other.dayOfMonth)
+                this.month!! == other.month &&
+                this.dayOfMonth == other.dayOfMonth
             }
             else -> false
         }

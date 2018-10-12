@@ -2,9 +2,9 @@ package interpreter
 
 class ForStatement(forString: String) : Statement(forString) {
 
-    lateinit var id: IdNode
-    lateinit var nodeSet: NodeSet
-    lateinit var statements: StatementList
+    var id: IdNode
+    var nodeSet: NodeSet
+    var statements: StatementList
 
     init {
         val tokens = forString.split(" ");

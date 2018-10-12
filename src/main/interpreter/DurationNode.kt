@@ -4,6 +4,7 @@ import utils.Constant.STATEMENT_DIVIDER_REGEX
 import utils.Grammar.isValidDuration
 
 class DurationNode(durationString: String) : Node(durationString) {
+
     var seconds: Int = 0
 
     //DURATION := <Num> (hours|minutes|seconds)
@@ -12,18 +13,16 @@ class DurationNode(durationString: String) : Node(durationString) {
         val durationIterator = durationString.split(STATEMENT_DIVIDER_REGEX).iterator()
         val key: String = durationIterator.next()
         while (durationIterator.hasNext()) {
-            val digit = key.toIntOrNull()
-            if (digit == null) {
-                //TODO - lorenzodb1: Throw exception
-            }
+            val digit: Int = key.toIntOrNull()
+                    ?: throw ParseException("") //TODO - lorenzodb1: Write message
             val magnitude = durationIterator.next()
             if(isValidDuration(magnitude)) {
                 if (magnitude == "seconds") {
-                    seconds = digit!!
+                    seconds = digit
                 } else if (magnitude == "minutes") {
-                    seconds = (digit!! * 60)
+                    seconds = (digit * 60)
                 } else if (magnitude == "hours") {
-                    seconds = (digit!! * 3600)
+                    seconds = (digit * 3600)
                 }
             }
         }

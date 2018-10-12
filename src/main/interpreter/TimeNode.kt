@@ -1,6 +1,5 @@
 package interpreter
 
-import interpreter.Node
 import java.lang.Exception
 
 class TimeNode(timeString: String) : Node(timeString) {

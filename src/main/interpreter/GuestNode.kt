@@ -5,7 +5,7 @@ import utils.Constant.EMAIL_REGEX
 
 class GuestNode(emailString: String) : Node(emailString) {
 
-    lateinit var email: String
+    var email: String
 
     init {
         if (EMAIL_REGEX.matches(emailString)) {

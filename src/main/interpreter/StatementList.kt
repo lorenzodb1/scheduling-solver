@@ -2,7 +2,7 @@ package interpreter
 
 class StatementList(statementsString: String) {
 
-    lateinit var statements: MutableList<Statement>
+    var statements: MutableList<Statement>
 
     companion object {
         // We use this enum when tracking what statement we're in when
@@ -18,8 +18,8 @@ class StatementList(statementsString: String) {
     init {
         statements = mutableListOf()
 
-        var tokens = statementsString.split(" ");
-        var tokensIter = tokens.iterator().withIndex()
+        val tokens = statementsString.split(" ")
+        val tokensIter = tokens.iterator().withIndex()
 
         // This tracks nest FOR loops so that we only split on the topmost level
         var forStatementDepth = 0
@@ -28,7 +28,7 @@ class StatementList(statementsString: String) {
         var startOfCurrentStatementIndex = 0;
 
         while (tokensIter.hasNext()) {
-            var (currentIndex, currentToken) = tokensIter.next();
+            val (currentIndex, currentToken) = tokensIter.next();
             when (currentToken.trim()) {
                 "LET" -> {
                     if (forStatementDepth == 0) {

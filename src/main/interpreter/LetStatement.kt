@@ -5,8 +5,8 @@ import utils.Grammar.isLetKey
 
 class LetStatement(letString: String): Statement(letString) {
 
-    lateinit var id: String
-    lateinit var value: Node
+    var id: String? = null
+    var value: Node? = null
 
     init {
         val letStatementIterator = letString.split(STATEMENT_DIVIDER_REGEX).iterator()
@@ -30,7 +30,7 @@ class LetStatement(letString: String): Statement(letString) {
         return when (other) {
             is LetStatement -> {
                 this.id.equals(other.id) &&
-                this.value.equals(other.value)
+                this.value!! == other.value
             }
             else -> false
         }

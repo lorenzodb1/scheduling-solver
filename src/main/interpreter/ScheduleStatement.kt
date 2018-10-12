@@ -13,12 +13,12 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
     //SCHEDULE := SCHEDULE <NODE> AT <NODE> [FOR <NODE>] [AT LOCATION <NODE>] [ON [EVERY ]<NODE> [AND <NODE>]*  [UNTIL <NODE>]][WITH (<NODE>|<NODESET>)]
     //DURATION = "for _"
     //DATE = ON
-    lateinit var description: String
-    lateinit var time: TimeNode
-    lateinit var duration: DurationNode
-    lateinit var location: LocationNode
-    lateinit var dates: Array<DateNode>
-    lateinit var guests: Array<GuestNode>
+    var description: String? = null
+    var time: TimeNode? = null
+    var duration: DurationNode? = null
+    var location: LocationNode? = null
+    var dates: Array<DateNode>? = null
+    var guests: Array<GuestNode>? = null
 
     init {
         val scheduleStatementIterator = scheduleString.split(STATEMENT_DIVIDER_REGEX).iterator()
@@ -48,11 +48,11 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
         return when (other) {
             is ScheduleStatement -> {
                 this.description.equals(other.description) &&
-                this.time.equals(other.time) &&
-                this.duration.equals(other.duration) &&
-                this.location.equals(other.location) &&
-                this.dates.contentDeepEquals(other.dates) &&
-                this.guests.contentDeepEquals(other.guests)
+                this.time!! == other.time &&
+                this.duration!! == other.duration &&
+                this.location!! == other.location &&
+                this.dates!!.contentDeepEquals(other.dates) &&
+                this.guests!!.contentDeepEquals(other.guests)
             }
             else -> false
         }

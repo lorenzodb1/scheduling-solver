@@ -19,6 +19,14 @@ class MonthNodeTest {
     }
 
     @Test
+    fun constructMonthNode_garbage_string() {
+        val monthString = "jsduary"
+        val exception = assertThrows(ParseException::class.java) {
+            MonthNode(monthString)
+        }
+    }
+
+    @Test
     fun constructIdNode_lower_case_january() {
         val monthString = "january"
         var monthNode = MonthNode(monthString)

@@ -6,7 +6,7 @@ class MonthNode(monthString: String) : Node(monthString) {
         fun determineMonth(monthString: String) : Month {
             return when (monthString.trim().toLowerCase()) {
                 "january", "jan" -> Month.JANUARY
-                "febrary", "feb" -> Month.FEBRUARY
+                "february", "feb" -> Month.FEBRUARY
                 "march", "mar" -> Month.MARCH
                 "april", "apr" -> Month.APRIL
                 "may" -> Month.MAY

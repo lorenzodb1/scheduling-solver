@@ -92,7 +92,8 @@ class StatementList(statementsString: String) {
             StatementType.SCHEDULE -> ScheduleStatement(statementString)
             StatementType.FOR -> ForStatement(statementString)
             else -> throw ParseException("Invalid StatementType matched in StatementList: \"$statementType\" " +
-                    "(NOTE: This probably means something is wrong with the code")
+                    "for string: \"${tokens.joinToString(" ")}\" " +
+                    "(NOTE: This probably means something is wrong with the code)")
         }
 
         statements.add(statement)

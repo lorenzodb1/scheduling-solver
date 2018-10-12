@@ -1,14 +1,20 @@
 package interpreter
 
+import utils.Constant.EMAIL_REGEX
+
 class GuestNode(emailString: String) : Node(emailString) {
 
     lateinit var email: String
 
     init {
-        //TODO: validate emailString and initialize email
+        if (EMAIL_REGEX.matches(emailString)) {
+            email = emailString
+        } else {
+            throw ParseException("Email $emailString is invalid")
+        }
     }
 
-    public override fun interp() {
+    override fun interp() {
         //TODO: implement
     }
 

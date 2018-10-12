@@ -70,11 +70,6 @@ class ForStatement(forString: String) : Statement(forString) {
         // Construct our Nodeset
         nodeSet = NodeSet(tokens.subList(nodesetStartIndex, nodeSetEndIndex).joinToString(" "))
 
-        // Check that next word is "DO"
-        if (!iterateOverWhitespace(tokensIter, "DO")) {
-            throw ParseException("Missing \"DO\" in string given to ForStatement: \"$forString\"")
-        }
-
         // Start of statements
         var numTokensInStatements = 0
         var forStatementDepth = 1

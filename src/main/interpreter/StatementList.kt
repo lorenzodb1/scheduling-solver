@@ -81,13 +81,13 @@ class StatementList(statementsString: String) {
         if (startIndex == endIndex) return
 
         // Build the statement from the given range in the tokens
-        var statementTokens = tokens.subList(startIndex, endIndex)
-        var statementString = statementTokens.joinToString(" ")
+        val statementTokens = tokens.subList(startIndex, endIndex)
+        val statementString = statementTokens.joinToString(" ")
 
         // Check for empty statement
         if (statementString.trim() == "") return
 
-        var statement: Statement = when (statementType) {
+        val statement: Statement = when (statementType) {
             StatementType.LET -> LetStatement(statementString)
             StatementType.SCHEDULE -> ScheduleStatement(statementString)
             StatementType.FOR -> ForStatement(statementString)

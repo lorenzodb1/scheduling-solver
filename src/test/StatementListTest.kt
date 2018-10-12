@@ -24,10 +24,10 @@ class StatementListTest {
 
     @Test
     fun constructStatementList_single_FOR_statement() {
-        var statementListString = "FOR \$X IN {5pm, 6pm} DO SCHEDULE dinner AT \$X ENDFOR"
+        var statementListString = "FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X ENDFOR"
         var statementList = StatementList(statementListString)
         assertArrayEquals(mutableListOf<Statement>(
-                ForStatement("FOR \$X IN {5pm, 6pm} DO SCHEDULE dinner AT \$X ENDFOR")
+                ForStatement("FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X ENDFOR")
         ).toTypedArray(), statementList.statements.toTypedArray())
     }
 
@@ -47,23 +47,23 @@ class StatementListTest {
 
     @Test
     fun constructStatementList_multiple_statements() {
-        var statementListString = "LET \$X = 5pm SCHEDULE dinner AT \$X FOR \$X IN {5pm, 6pm} DO SCHEDULE dinner AT \$X ENDFOR"
+        var statementListString = "LET \$X = 5pm SCHEDULE dinner AT \$X FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X ENDFOR"
         var statementList = StatementList(statementListString)
         assertArrayEquals(mutableListOf<Statement>(
                 LetStatement("LET \$X = 5pm"),
                 ScheduleStatement("SCHEDULE dinner AT \$X"),
-                ForStatement("FOR \$X IN {5pm, 6pm} DO SCHEDULE dinner AT \$X ENDFOR")
+                ForStatement("FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X ENDFOR")
         ).toTypedArray(), statementList.statements.toTypedArray())
     }
 
     @Test
     fun constructStatementList_multiple_statements_wierd_spacing() {
-        var statementListString = "   LET \$X =  5pm        SCHEDULE dinner AT     \$X     FOR     \$X IN {5pm, 6pm} DO SCHEDULE dinner AT \$X ENDFOR   "
+        var statementListString = "   LET \$X =  5pm        SCHEDULE dinner AT     \$X     FOR     \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X ENDFOR   "
         var statementList = StatementList(statementListString)
         assertArrayEquals(mutableListOf<Statement>(
                 LetStatement("LET \$X = 5pm"),
                 ScheduleStatement("SCHEDULE dinner AT \$X"),
-                ForStatement("FOR \$X IN {5pm, 6pm} DO SCHEDULE dinner AT \$X ENDFOR")
+                ForStatement("FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X ENDFOR")
         ).toTypedArray(), statementList.statements.toTypedArray())
     }
 
@@ -78,7 +78,7 @@ class StatementListTest {
 
     @Test
     fun constructStatementList_unmatched_FOR() {
-        var statementListString = "FOR \$X IN {5pm, 6pm} DO SCHEDULE dinner AT \$X"
+        var statementListString = "FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X"
         val exception = assertThrows(ParseException::class.java) {
             StatementList(statementListString)
         }
@@ -86,7 +86,7 @@ class StatementListTest {
 
     @Test
     fun constructStatementList_unmatched_ENDFOR() {
-        var statementListString = "FOR \$X IN {5pm, 6pm} DO SCHEDULE dinner AT \$X"
+        var statementListString = "FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X"
         val exception = assertThrows(ParseException::class.java) {
             StatementList(statementListString)
         }

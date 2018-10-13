@@ -1,7 +1,5 @@
 package interpreter
 
-import utils.Constant.STATEMENT_DIVIDER_REGEX
-
 class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
 
     //SCHEDULE := SCHEDULE <NODE> AT <NODE> [FOR <NODE>] [AT LOCATION <NODE>] [ON [EVERY ]<NODE> [AND <NODE>]*  [UNTIL <NODE>]][WITH (<NODE>|<NODESET>)]
@@ -106,18 +104,16 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
             }
         }
 
-
         //something that saves dates of the days you want
         val todays_date = CurrentDate.getDate()
         //would have to parse this and feed it into Calendar?
-
 
         if (iterateOverWhitespace(tokensIter, "WITH")) {
             // Get the duration if there is one
             when (nextNonWhitespaceToken) {
                 null -> throw ParseException("Missing guests of event")
                 else -> {
-                    guests = arrayOf<GuestNode>()
+                    guests = arrayOf()
                 }
             }
         }

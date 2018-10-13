@@ -10,8 +10,19 @@ class DateNode(dateString: String) : Node(dateString) {
         month = MonthNode("January")
 
         //TODO: Given dateString, parse and set values for month and dayOfMonth.
-    }
 
+        val dateStringTrimmedAndLowerCase = dateString.toLowerCase().trim()
+
+        //[ ] DATE := <MONTH> <Num>[st|th] | <Num>[st|th] OF <MONTH>
+
+        //<MONTH> <Num>[st|th]
+        val matches = Regex("^([A-z]+)\\s+(\\d+)[st|th]$")
+                        .matchEntire(dateStringTrimmedAndLowerCase)
+        if (matches != null) {
+        }
+        // TODO:
+        // <Num>[st|th] OF <MONTH>
+    }
 
     public override fun interp() {
         //TODO: implement

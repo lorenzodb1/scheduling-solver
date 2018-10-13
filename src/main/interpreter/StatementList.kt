@@ -2,7 +2,7 @@ package interpreter
 
 class StatementList(statementsString: String) {
 
-    var statements: MutableList<Statement>
+    var statements: MutableList<Statement> = mutableListOf()
 
     companion object {
         // We use this enum when tracking what statement we're in when
@@ -16,8 +16,6 @@ class StatementList(statementsString: String) {
     }
 
     init {
-        statements = mutableListOf()
-
         val tokens = statementsString.split(" ")
         val tokensIter = tokens.iterator().withIndex()
 
@@ -25,23 +23,23 @@ class StatementList(statementsString: String) {
         var forStatementDepth = 0
 
         var currentStatementType = StatementType.NONE
-        var startOfCurrentStatementIndex = 0;
+        var startOfCurrentStatementIndex = 0
 
         while (tokensIter.hasNext()) {
-            val (currentIndex, currentToken) = tokensIter.next();
+            val (currentIndex, currentToken) = tokensIter.next()
             when (currentToken.trim()) {
                 "LET" -> {
                     if (forStatementDepth == 0) {
                         buildAndAddStatement(tokens, startOfCurrentStatementIndex, currentIndex, currentStatementType)
                         currentStatementType = StatementType.LET
-                        startOfCurrentStatementIndex = currentIndex;
+                        startOfCurrentStatementIndex = currentIndex
                     }
                 }
                 "FOR" -> {
                     if (forStatementDepth == 0){
                         buildAndAddStatement(tokens, startOfCurrentStatementIndex, currentIndex, currentStatementType)
                         currentStatementType = StatementType.FOR
-                        startOfCurrentStatementIndex = currentIndex;
+                        startOfCurrentStatementIndex = currentIndex
                     }
                     forStatementDepth++
                 }
@@ -52,7 +50,7 @@ class StatementList(statementsString: String) {
                     if (forStatementDepth == 0) {
                         buildAndAddStatement(tokens, startOfCurrentStatementIndex, currentIndex, currentStatementType)
                         currentStatementType = StatementType.SCHEDULE
-                        startOfCurrentStatementIndex = currentIndex;
+                        startOfCurrentStatementIndex = currentIndex
                     }
                 }
                 else -> {
@@ -73,10 +71,7 @@ class StatementList(statementsString: String) {
 
     }
 
-    fun buildAndAddStatement(tokens: List<String>,
-                             startIndex: Int,
-                             endIndex: Int,
-                             statementType: StatementType){
+    private fun buildAndAddStatement(tokens: List<String>, startIndex: Int, endIndex: Int, statementType: StatementType) {
         // Check for empty statement
         if (startIndex == endIndex) return
 

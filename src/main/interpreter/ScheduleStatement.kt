@@ -88,7 +88,7 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
                 }
             }
 
-            while(iterateOverWhitespace(tokensIter, "AND")){
+            while (iterateOverWhitespace(tokensIter, "AND")) {
                 when (nextNonWhitespaceToken) {
                     null -> throw ParseException("Missing week of event")
                     else -> {
@@ -107,11 +107,10 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
             }
         }
 
+
         //something that saves dates of the days you want
         val todays_date = CurrentDate.getDate()
         //would have to parse this and feed it into Calendar?
-        dates = arrayOf<DateNode>()
-
 
 
             if (iterateOverWhitespace(tokensIter, "WITH")) {

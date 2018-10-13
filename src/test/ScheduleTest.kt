@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions.*
 import java.text.ParseException
 import CurrentDate
 import CurrentTime
+import java.time.Duration
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS) // This annotation is required for @BeforeAll to work
 class ScheduleTest {
@@ -18,12 +19,12 @@ class ScheduleTest {
 
         var ScheduleStatement = ScheduleStatement(scheduleString);
 
-        assertEquals(IdNode("Fencing"), ScheduleStatement.description)
-        assertEquals(IdNode("5 am"), ScheduleStatement.time)
-        assertEquals(IdNode("2 hours"), ScheduleStatement.duration)
-        assertEquals(IdNode("UBC"), ScheduleStatement.location)
-        assertEquals(IdNode("october 14th, october 15th"), ScheduleStatement.dates)
-        assertEquals(IdNode("leticia.c.nakajima@gmail.com"), ScheduleStatement.guests)
+        assertEquals(("Fencing"), ScheduleStatement.description)
+        assertEquals(TimeNode("5 am"), ScheduleStatement.time)
+        assertEquals(DurationNode("2 hours"), ScheduleStatement.duration)
+        assertEquals(LocationNode("UBC"), ScheduleStatement.location)
+        assertEquals(DateNode("october 14th, october 15th"), ScheduleStatement.dates)
+        assertEquals(GuestNode("leticia.c.nakajima@gmail.com"), ScheduleStatement.guests)
 
 
     }
@@ -34,12 +35,13 @@ class ScheduleTest {
 
             var ScheduleStatement = ScheduleStatement(scheduleString);
 
-            assertEquals(IdNode("Fencing"), ScheduleStatement.description)
-            assertEquals(IdNode("5 AM"), ScheduleStatement.time)
-            assertEquals(IdNode("2 hours"), ScheduleStatement.duration)
-            assertEquals(IdNode("UBC"), ScheduleStatement.location)
-            assertEquals(IdNode("october 14th, october 15th"), ScheduleStatement.dates)
-            assertEquals(IdNode("leticia.c.nakajima@gmail.com"), ScheduleStatement.guests)
+            assertEquals(("Fencing"), ScheduleStatement.description)
+            assertEquals(TimeNode("5 AM"), ScheduleStatement.time)
+            assertEquals(DurationNode("2 hours"), ScheduleStatement.duration)
+            assertEquals(LocationNode("UBC"), ScheduleStatement.location)
+            assertEquals(DateNode("october 14th, october 15th"), ScheduleStatement.dates)
+            assertEquals(GuestNode("leticia.c.nakajima@gmail.com"), ScheduleStatement.guests)
+
         }
 
     @Test
@@ -48,11 +50,11 @@ class ScheduleTest {
 
         var ScheduleStatement = ScheduleStatement(scheduleString);
 
-        assertEquals(IdNode("Fencing"), ScheduleStatement.description)
-        assertEquals(IdNode("5 am"), ScheduleStatement.time)
-        assertEquals(IdNode("UBC"), ScheduleStatement.location)
-        assertEquals(IdNode("october 14th, october 15th"), ScheduleStatement.dates)
-        assertEquals(IdNode("leticia.c.nakajima@gmail.com"), ScheduleStatement.guests)
+        assertEquals(("Fencing"), ScheduleStatement.description)
+        assertEquals(TimeNode("5 AM"), ScheduleStatement.time)
+        assertEquals(LocationNode("UBC"), ScheduleStatement.location)
+        assertEquals(DateNode("october 14th, october 15th"), ScheduleStatement.dates)
+        assertEquals(GuestNode("leticia.c.nakajima@gmail.com"), ScheduleStatement.guests)
     }
 
     @Test
@@ -61,11 +63,11 @@ class ScheduleTest {
 
         var ScheduleStatement = ScheduleStatement(scheduleString);
 
-        assertEquals(IdNode("Fencing"), ScheduleStatement.description)
-        assertEquals(IdNode("5 am"), ScheduleStatement.time)
-        assertEquals(IdNode("2 hours"), ScheduleStatement.duration)
-        assertEquals(IdNode("october 14th, october 15th"), ScheduleStatement.dates)
-        assertEquals(IdNode("leticia.c.nakajima@gmail.com"), ScheduleStatement.guests)
+        assertEquals(("Fencing"), ScheduleStatement.description)
+        assertEquals(TimeNode("5 AM"), ScheduleStatement.time)
+        assertEquals(DurationNode("2 hours"), ScheduleStatement.duration)
+        assertEquals(DateNode("october 14th, october 15th"), ScheduleStatement.dates)
+        assertEquals(GuestNode("leticia.c.nakajima@gmail.com"), ScheduleStatement.guests)
     }
 
     @Test
@@ -74,11 +76,11 @@ class ScheduleTest {
 
         var ScheduleStatement = ScheduleStatement(scheduleString);
 
-        assertEquals(IdNode("Fencing"), ScheduleStatement.description)
-        assertEquals(IdNode("5 am"), ScheduleStatement.time)
-        assertEquals(IdNode("2 hours"), ScheduleStatement.duration)
-        assertEquals(IdNode("UBC"), ScheduleStatement.location)
-        assertEquals(IdNode("leticia.c.nakajima@gmail.com"), ScheduleStatement.guests)
+        assertEquals(("Fencing"), ScheduleStatement.description)
+        assertEquals(TimeNode("5 AM"), ScheduleStatement.time)
+        assertEquals(DurationNode("2 hours"), ScheduleStatement.duration)
+        assertEquals(LocationNode("UBC"), ScheduleStatement.location)
+        assertEquals(GuestNode("leticia.c.nakajima@gmail.com"), ScheduleStatement.guests)
     }
 
     @Test
@@ -86,17 +88,14 @@ class ScheduleTest {
         var scheduleString = "SCHEDULE Fencing AT 5 AM FOR 2 hours IN UBC ON EVERY Monday AND Sunday UNTIL 2nd of November"
 
         var ScheduleStatement = ScheduleStatement(scheduleString);
-
-        assertEquals(IdNode("Fencing"), ScheduleStatement.description)
-        assertEquals(IdNode("5 am"), ScheduleStatement.time)
-        assertEquals(IdNode("2 hours"), ScheduleStatement.duration)
-        assertEquals(IdNode("UBC"), ScheduleStatement.location)
-        assertEquals(IdNode("october 14th, october 15th"), ScheduleStatement.dates)
+        assertEquals(("Fencing"), ScheduleStatement.description)
+        assertEquals(TimeNode("5 AM"), ScheduleStatement.time)
+        assertEquals(DurationNode("2 hours"), ScheduleStatement.duration)
+        assertEquals(LocationNode("UBC"), ScheduleStatement.location)
+        assertEquals(DateNode("october 14th, october 15th"), ScheduleStatement.dates)
     }
 
-
-
-
+    //add more specific format tests
 
 
 }

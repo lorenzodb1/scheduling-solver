@@ -7,8 +7,8 @@ class ForStatement(forString: String) : Statement(forString) {
     var statements: StatementList
 
     init {
-        val tokens = forString.split(" ");
-        val tokensIter = tokens.iterator().withIndex();
+        val tokens = forString.split(" ")
+        val tokensIter = tokens.iterator().withIndex()
 
         // Check for starting FOR
         if (!iterateOverWhitespace(tokensIter, "FOR")) {
@@ -41,7 +41,7 @@ class ForStatement(forString: String) : Statement(forString) {
         }
 
         // In case there are nested Nodesets, track our depth
-        var nodesetDepth = 0;
+        var nodesetDepth = 0
         var currIndex = nodesetStartIndex
         var currToken = tokens[nodesetStartIndex]
         while (tokensIter.hasNext()) {
@@ -76,7 +76,7 @@ class ForStatement(forString: String) : Statement(forString) {
         currIndex = -1
         var currentToken = ""
         loop@ while (tokensIter.hasNext()) {
-            var currIndexAndToken = tokensIter.next()
+            val currIndexAndToken = tokensIter.next()
             currIndex = currIndexAndToken.index
             currToken = currIndexAndToken.value
             numTokensInStatements++
@@ -111,8 +111,8 @@ class ForStatement(forString: String) : Statement(forString) {
      * then returns true, else returns false
      */
     private fun iterateOverWhitespace(iter: Iterator<IndexedValue<String>>, keyword: String): Boolean {
-        while (iter.hasNext()){
-            var currentToken = iter.next().value
+        while (iter.hasNext()) {
+            val currentToken = iter.next().value
             if (currentToken.trim() != "") {
                 return currentToken.trim() == keyword
             }
@@ -127,7 +127,7 @@ class ForStatement(forString: String) : Statement(forString) {
      */
     private fun iterateOverWhitespace(iter: Iterator<IndexedValue<String>>): IndexedValue<String>? {
         while (iter.hasNext()) {
-            var (currentIndex, currentToken) = iter.next()
+            val (currentIndex, currentToken) = iter.next()
             if (currentToken.trim() != "") {
                 return IndexedValue(currentIndex, currentToken)
             }

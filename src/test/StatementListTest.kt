@@ -8,15 +8,15 @@ class StatementListTest {
 
     @Test
     fun constructStatementList_empty_list() {
-        var statementListString = ""
-        var statementList = StatementList(statementListString)
+        val statementListString = ""
+        val statementList = StatementList(statementListString)
         assertArrayEquals(mutableListOf<Statement>().toTypedArray(), statementList.statements.toTypedArray())
     }
 
     @Test
     fun constructStatementList_single_LET_statement() {
-        var statementListString = "LET \$X = 5pm"
-        var statementList = StatementList(statementListString)
+        val statementListString = "LET \$X = 5pm"
+        val statementList = StatementList(statementListString)
         assertArrayEquals(mutableListOf<Statement>(
                 LetStatement("LET \$X = 5pm")
         ).toTypedArray(), statementList.statements.toTypedArray())
@@ -24,8 +24,8 @@ class StatementListTest {
 
     @Test
     fun constructStatementList_single_FOR_statement() {
-        var statementListString = "FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X ENDFOR"
-        var statementList = StatementList(statementListString)
+        val statementListString = "FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X ENDFOR"
+        val statementList = StatementList(statementListString)
         assertArrayEquals(mutableListOf<Statement>(
                 ForStatement("FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X ENDFOR")
         ).toTypedArray(), statementList.statements.toTypedArray())
@@ -33,12 +33,12 @@ class StatementListTest {
 
     @Test
     fun constructStatementList_single_SCHEDULE_statement() {
-        var statementListString = "SCHEDULE dinner AT \$X"
-        var statementList = StatementList(statementListString)
-        var expectedStatements = mutableListOf(
+        val statementListString = "SCHEDULE dinner AT \$X"
+        val statementList = StatementList(statementListString)
+        val expectedStatements = mutableListOf(
                 ScheduleStatement("SCHEDULE dinner AT \$X")
         ).toTypedArray();
-        var actualStatements = statementList.statements.toTypedArray()
+        val actualStatements = statementList.statements.toTypedArray()
         //assertTrue(expectedStatements.contentEquals(actualStatements))
         assertArrayEquals(mutableListOf(
                 ScheduleStatement("SCHEDULE dinner AT \$X")
@@ -47,8 +47,8 @@ class StatementListTest {
 
     @Test
     fun constructStatementList_multiple_statements() {
-        var statementListString = "LET \$X = 5pm SCHEDULE dinner AT \$X FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X ENDFOR"
-        var statementList = StatementList(statementListString)
+        val statementListString = "LET \$X = 5pm SCHEDULE dinner AT \$X FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X ENDFOR"
+        val statementList = StatementList(statementListString)
         assertArrayEquals(mutableListOf<Statement>(
                 LetStatement("LET \$X = 5pm"),
                 ScheduleStatement("SCHEDULE dinner AT \$X"),
@@ -58,8 +58,8 @@ class StatementListTest {
 
     @Test
     fun constructStatementList_multiple_statements_wierd_spacing() {
-        var statementListString = "   LET \$X =  5pm        SCHEDULE dinner AT     \$X     FOR     \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X ENDFOR   "
-        var statementList = StatementList(statementListString)
+        val statementListString = "   LET \$X =  5pm        SCHEDULE dinner AT     \$X     FOR     \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X ENDFOR   "
+        val statementList = StatementList(statementListString)
         assertArrayEquals(mutableListOf<Statement>(
                 LetStatement("LET \$X = 5pm"),
                 ScheduleStatement("SCHEDULE dinner AT \$X"),
@@ -69,8 +69,8 @@ class StatementListTest {
 
     @Test
     fun constructStatementList_nested_FOR_loops() {
-        var statementListString = "FOR \$X IN {5pm, 6pm} FOR \$Y IN {dinner, lunch} SCHEDULE \$Y AT \$X ENDFOR ENDFOR"
-        var statementList = StatementList(statementListString)
+        val statementListString = "FOR \$X IN {5pm, 6pm} FOR \$Y IN {dinner, lunch} SCHEDULE \$Y AT \$X ENDFOR ENDFOR"
+        val statementList = StatementList(statementListString)
         assertArrayEquals(mutableListOf<Statement>(
                 ForStatement("FOR \$X IN {5pm, 6pm} FOR \$Y IN {dinner, lunch} SCHEDULE \$Y AT \$X ENDFOR ENDFOR")
         ).toTypedArray(), statementList.statements.toTypedArray())
@@ -78,16 +78,16 @@ class StatementListTest {
 
     @Test
     fun constructStatementList_unmatched_FOR() {
-        var statementListString = "FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X"
-        val exception = assertThrows(ParseException::class.java) {
+        val statementListString = "FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X"
+        assertThrows(ParseException::class.java) {
             StatementList(statementListString)
         }
     }
 
     @Test
     fun constructStatementList_unmatched_ENDFOR() {
-        var statementListString = "FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X"
-        val exception = assertThrows(ParseException::class.java) {
+        val statementListString = "FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X"
+        assertThrows(ParseException::class.java) {
             StatementList(statementListString)
         }
     }

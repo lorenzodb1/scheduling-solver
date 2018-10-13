@@ -143,8 +143,8 @@ class ForStatement(forString: String) : Statement(forString) {
         return when (other) {
             is ForStatement -> {
                 this.id.equals(other.id) &&
-                this.nodeSet.equals(other.nodeSet) &&
-                this.statements.equals(other.statements)
+                        this.nodeSet.equals(other.nodeSet) &&
+                        this.statements.equals(other.statements)
             }
             else -> false
         }

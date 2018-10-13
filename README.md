@@ -27,16 +27,20 @@ SCHEDULE := SCHEDULE <NODE> AT <NODE> [FOR <NODE>] [IN <NODE>] [ON [EVERY ]<NODE
 [x] NODE := <MONTH>|<DATE>|<DAY>|<DURATION>|<TIME>|<GUEST>|<LOCATION>|<ID>|<String>
 [x] ID := $<String>
 [x] NODESET := {<NODE> (, <NODE>)*}
-[ ] LET := LET <ID> = (<NODE>|<NODESET>)
+[x] LET := LET <ID> = (<NODE>|<NODESET>)
 [x] FOR := FOR <ID> IN <NODESET> <STATEMENT>* ENDFOR
-[ ] MONTH := January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept|Oct|Nov|Dec
-[ ] DATE := <MONTH> <Num>[st|th] | <Num>[st|th] OF <MONTH>
-[ ] DAY := Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|Mon|Tues|Wed|Thur|Fri|Sat|Sun|<DATE>
-[ ] DURATION := <Num> (hours|minutes|seconds)
+[x] MONTH := January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept|Oct|Nov|Dec|january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sept|oct|nov|dec|
+[x] DATE := <MONTH> <Num>[st|th] | <Num>[st|th] OF <MONTH>
+[x] DAY := Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|Mon|Tues|Wed|Thur|Fri|Sat|Sun
+[x] DURATION := <Num> (hours|minutes)
 [x] TIME := <Num>[ ][AM|PM|am|pm]
 [~] (written, not tested) GUEST := <Any Valid Email>
 [ ] LOCATION := <Any Valid Address>
+<<<<<<< HEAD
 [ ] SCHEDULE := SCHEDULE <NODE> AT <NODE> [FOR <NODE>] [AT LOCATION <NODE>] [ON [EVERY ]<NODE> [AND <NODE>]*  [UNTIL <NODE>]][WITH (<NODE>|<NODESET>)]
+>>>>>>> origin/master
+=======
+[ ] SCHEDULE := SCHEDULE <NODE> AT <NODE> [FOR <NODE>] [IN <NODE>] [ON [EVERY ]<NODE> [AND <NODE>]*  [UNTIL <NODE>]][WITH (<NODE>|<NODESET>)]
 >>>>>>> origin/master
 ```
 

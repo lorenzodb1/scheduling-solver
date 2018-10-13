@@ -2,7 +2,7 @@ package utils
 
 object Constant {
 
-    internal val STATEMENT_DIVIDER_REGEX: Regex = Regex("""/\{([^}]+)\}|([^\s]+)/g""")
+    internal val STATEMENT_DIVIDER_REGEX: Regex = Regex("""\{([^}]+)\}|([^\s]+)""")
 
     internal val COMMA_REGEX: Regex = Regex("""/([^,]+)/g""")
 

@@ -1,30 +1,29 @@
 package interpreter
 
-import utils.Constant.STATEMENT_DIVIDER_REGEX
-import utils.Grammar.isValidDuration
-
 class DurationNode(durationString: String) : Node(durationString) {
-
-    var seconds: Int = 0
-
-    //DURATION := <Num> (hours|minutes|seconds)
+    var minutes = 0
 
     init {
-        val durationIterator = durationString.split(STATEMENT_DIVIDER_REGEX).iterator()
-        val key: String = durationIterator.next()
-        while (durationIterator.hasNext()) {
-            val digit: Int = key.toIntOrNull()
-                    ?: throw ParseException("") //TODO - lorenzodb1: Write message
-            val magnitude = durationIterator.next()
-            if(isValidDuration(magnitude)) {
-                if (magnitude == "seconds") {
-                    seconds = digit
-                } else if (magnitude == "minutes") {
-                    seconds = (digit * 60)
-                } else if (magnitude == "hours") {
-                    seconds = (digit * 3600)
-                }
-            }
+        val durationStringTrimmedAndLowerCase = durationString.trim().toLowerCase()
+        val matches = Regex("^(\\d+)\\s+([A-z]+)$")
+                .matchEntire(durationStringTrimmedAndLowerCase)
+
+        if (matches == null){
+            throw ParseException("Invalid string given to DurationNode: $durationString")
+        }
+
+        var numericValue = 0
+        try {
+            numericValue = matches.groupValues[1].toInt()
+        } catch (e: Exception) {
+            throw ParseException("Invalid numeric value in string given to DurationNode: $durationString")
+        }
+
+        val unitString = matches.groupValues[2]
+        when (unitString) {
+            "hours" -> minutes = numericValue * 60
+            "minutes" -> minutes = numericValue * 1
+            else -> throw ParseException("Invalid units in string given to DurationNode: $durationString")
         }
     }
 
@@ -34,7 +33,7 @@ class DurationNode(durationString: String) : Node(durationString) {
 
     override fun equals(other: Any?): Boolean {
         return when (other) {
-            is DurationNode -> this.seconds.equals(other.seconds)
+            is DurationNode -> this.minutes.equals(other.minutes)
             else -> false
         }
     }

@@ -1,30 +1,40 @@
 package interpreter
 
-class DayNode(s: String) : Node(s) {
+class DayNode(dayString: String) : Node(dayString) {
 
-    enum class Day {
-        MONDAY,
-        TUESDAY,
-        WEDNESDAY,
-        THURSDAY,
-        FRIDAY,
-        SATURDAY,
-        SUNDAY
+    companion object {
+
+        enum class Day {
+            MONDAY,
+            TUESDAY,
+            WEDNESDAY,
+            THURSDAY,
+            FRIDAY,
+            SATURDAY,
+            SUNDAY
+        }
+
+        fun determineDay(dayString: String) : Day {
+            return when (dayString.trim().toLowerCase()) {
+                "monday", "mon" -> Day.MONDAY
+                "tuesday", "tues" -> Day.TUESDAY
+                "wednesday", "wed" -> Day.WEDNESDAY
+                "thursday", "thur", "thurs" -> Day.THURSDAY
+                "friday", "fri" -> Day.THURSDAY
+                "saturday", "sat" -> Day.THURSDAY
+                "sunday", "sun" -> Day.THURSDAY
+                else -> throw ParseException("Invalid string given to DayNode: \"$dayString\"")
+            }
+        }
     }
 
-    val day = determineDay(s)
+    val day = determineDay(dayString)
 
 
     override fun interp() {
         //TODO: implement
     }
 
-    companion object {
-        fun determineDay(dayString: String) : Day {
-            //TODO: implement
-            return Day.MONDAY
-        }
-    }
 
     override fun equals(other: Any?): Boolean {
         return when (other) {

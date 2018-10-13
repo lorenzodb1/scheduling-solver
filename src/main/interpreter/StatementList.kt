@@ -99,8 +99,8 @@ class StatementList(statementsString: String) {
         statements.add(statement)
     }
 
-    fun interp() {
-
+    fun interp(symbolTable: SymbolTable): SymbolTable {
+        return symbolTable
     }
 
     override fun equals(other: Any?): Boolean {

@@ -135,8 +135,8 @@ class ForStatement(forString: String) : Statement(forString) {
         return null
     }
 
-    override fun interp() {
-
+    override fun interp(symbolTable: SymbolTable): SymbolTable {
+        TODO()
     }
 
     override fun equals(other: Any?): Boolean {

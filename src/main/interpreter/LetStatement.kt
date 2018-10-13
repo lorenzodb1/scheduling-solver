@@ -27,8 +27,8 @@ class LetStatement(letString: String): Statement(letString) {
         value = valueTokens[0]
     }
 
-    override fun interp() {
-
+    override fun interp(symbolTable: SymbolTable): SymbolTable {
+        TODO()
     }
 
     override fun equals(other: Any?): Boolean {

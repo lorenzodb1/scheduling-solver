@@ -3,5 +3,5 @@ package interpreter
 
 abstract class Statement(s: String) {
 
-    abstract fun interp()
+    abstract fun interp(symbolTable: SymbolTable): SymbolTable
 }

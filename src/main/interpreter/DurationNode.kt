@@ -27,8 +27,8 @@ class DurationNode(durationString: String) : Node(durationString) {
         }
     }
 
-    override fun interp() {
-        //TODO: implement
+    override fun interp(symbolTable: SymbolTable): SymbolTable {
+        return symbolTable
     }
 
     override fun equals(other: Any?): Boolean {

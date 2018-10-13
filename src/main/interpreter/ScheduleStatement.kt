@@ -2,29 +2,40 @@ package interpreter
 
 class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
 
+    // TODO: Delete me
     //SCHEDULE := SCHEDULE <NODE> AT <NODE> [FOR <NODE>] [AT LOCATION <NODE>] [ON [EVERY ]<NODE> [AND <NODE>]*  [UNTIL <NODE>]][WITH (<NODE>|<NODESET>)]
-    //DURATION = "for _"
-    //DATE = ON
+
+    // The string representation of ScheduleStatement that we're passed at parse time.
+    // We hold this and delay parsing until interp. time so that we can do variable substitution first
+    lateinit var savedScheduleString: String
+
     var description: String? = null
     var time: TimeNode? = null
     var duration: DurationNode? = null
     var location: LocationNode? = null
+    // NOTE: These array not nullable because comparing nullable arrays is a pain in the ass
+    // and having them null doesn't really add any semantic meaning for us over them beeing empty
     var dates: Array<DateNode> = arrayOf()
     var guests: Array<GuestNode> = arrayOf()
 
     init {
-        val tokens = scheduleString.split(" ")
+        savedScheduleString = scheduleString
+    }
+
+    // Parse the given SCHEDULE statement and populate member variables appropriately
+    fun parse(str: String) {
+        val tokens = str.split(" ")
         val tokensIter = tokens.iterator().withIndex()
 
         // check for schedule
         if (!iterateOverWhitespace(tokensIter, "SCHEDULE")) {
-            throw ParseException("Missing SCHEDULE statement statement")
+            throw ParseException("Missing SCHEDULE keyword in string passed to ScheduleStatement: $str")
         }
 
         // Get the Id
         val nextNonWhitespacepiece = iterateOverWhitespace(tokensIter)
         when (nextNonWhitespacepiece) {
-            null -> throw ParseException("Missing description of event")
+            null -> throw ParseException("Missing description in string passed to ScheduleStatement: $str")
             else -> {
                 description = nextNonWhitespacepiece.value
             }
@@ -119,8 +130,16 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
         }
     }
 
-    override fun interp() {
+    // Substitute all variables in the given string and return the substituted string
+    fun subsituteVariables(str: String, symbolTable: SymbolTable): String {
+        // TODO
+        return str
+    }
 
+    override fun interp(symbolTable: SymbolTable): SymbolTable {
+        val substitutedScheduleString = subsituteVariables(savedScheduleString, symbolTable)
+        parse(substitutedScheduleString)
+        return symbolTable
     }
 
     /**

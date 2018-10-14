@@ -25,6 +25,10 @@ class LetStatement(letString: String): Statement(letString) {
             throw ParseException("Spaces in value in string passed to LetStatement: \"$letString\"")
         }
         value = valueTokens[0]
+
+        if (value.contains('$')) {
+            throw ParseException("Value given to LetStatement contains forbidden character '\$': \"$letString\"")
+        }
     }
 
     override fun interp(symbolTable: SymbolTable): SymbolTable {

@@ -63,6 +63,14 @@ class LetStatementTest {
     }
 
     @Test
+    fun constructLetStatement_illegal_character_in_value() {
+        val letString =  "LET \$X = \$Y"
+        assertThrows(ParseException::class.java) {
+            LetStatement(letString)
+        }
+    }
+
+    @Test
     fun constructLetStatement_empty_string() {
         val dayString = ""
         assertThrows(ParseException::class.java) {

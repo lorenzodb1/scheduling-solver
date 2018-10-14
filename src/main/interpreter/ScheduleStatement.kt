@@ -113,7 +113,6 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
 
     override fun toString(): String {
         var str = ""
-        // TODO: Delete me
         str += "-----------\n"
         str += "Description: " + description + "\n"
         str += "Time: " + time?.hour + " hour(s), " + time?.minute + " minute(s)" + "\n"
@@ -146,7 +145,7 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
 
             // Check to make sure everything was substituted
             if (mutableStr.contains('$')) {
-                throw InterpException("No known value for at least on variable in string passed to ScheduleStatement: $str")
+                throw InterpException("No known value for at least one variable in string passed to ScheduleStatement: $str")
             }
 
             return mutableStr

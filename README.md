@@ -20,7 +20,7 @@
 [x] TIME := <Num>[ ][AM|PM|am|pm]
 [x] (written, not tested) GUEST := <Any Valid Email>
 [x] LOCATION := <Any Valid Address>
-[ ] SCHEDULE := SCHEDULE <NODE> AT <NODE> [FOR <NODE>] [IN <NODE>] [ON [EVERY ]<NODE> [AND <NODE>]*  [UNTIL <NODE>]][WITH (<NODE>|<NODESET>)]
+[ ] SCHEDULE := SCHEDULE <NODE> AT <NODE> [FOR <NODE>] [IN <NODE>] [ON [EVERY ]<NODE> [AND <NODE>]*  [UNTIL <NODE>]][WITH <NODE> [AND <NODE>]*]
 ```
 
 ## Notes From TA 

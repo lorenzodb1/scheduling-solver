@@ -1,43 +1,30 @@
 package interpreter
 
+import java.util.Calendar
+
 class MonthNode(monthString: String) : Node(monthString) {
 
     companion object {
-        fun determineMonth(monthString: String) : Month {
+        fun determineMonth(monthString: String) : Int {
             return when (monthString.trim().toLowerCase()) {
-                "january", "jan" -> Month.JANUARY
-                "february", "feb" -> Month.FEBRUARY
-                "march", "mar" -> Month.MARCH
-                "april", "apr" -> Month.APRIL
-                "may" -> Month.MAY
-                "june", "jun" -> Month.JUNE
-                "july", "jul" -> Month.JULY
-                "august", "aug" -> Month.AUGUST
-                "september", "sept" -> Month.SEPTEMBER
-                "october", "oct" -> Month.OCTOBER
-                "november", "nov" -> Month.NOVEMBER
-                "december", "dec" -> Month.DECEMBER
+                "january", "jan" -> Calendar.JANUARY
+                "february", "feb" -> Calendar.FEBRUARY
+                "march", "mar" -> Calendar.MARCH
+                "april", "apr" -> Calendar.APRIL
+                "may" -> Calendar.MAY
+                "june", "jun" -> Calendar.JUNE
+                "july", "jul" -> Calendar.JULY
+                "august", "aug" -> Calendar.AUGUST
+                "september", "sept" -> Calendar.SEPTEMBER
+                "october", "oct" -> Calendar.OCTOBER
+                "november", "nov" -> Calendar.NOVEMBER
+                "december", "dec" -> Calendar.DECEMBER
                 else -> throw ParseException("Invalid string given to MonthNode: \"$monthString\"")
             }
         }
-
-        enum class Month {
-            JANUARY,
-            FEBRUARY,
-            MARCH,
-            APRIL,
-            MAY,
-            JUNE,
-            JULY,
-            AUGUST,
-            SEPTEMBER,
-            OCTOBER,
-            NOVEMBER,
-            DECEMBER
-        }
     }
 
-    val month: Month = determineMonth(monthString)
+    val month = determineMonth(monthString)
 
     override fun interp(symbolTable: SymbolTable): SymbolTable {
         return symbolTable

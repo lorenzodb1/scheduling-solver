@@ -6,8 +6,8 @@ import java.time.Month
 
 class DateNode(dateString: String) : Node(dateString) {
 
-    var month: MonthNode? = null
-    var dayOfMonth: Int = 0 //TODO: make into a node?
+    var month: MonthNode
+    var dayOfMonth: Int = -1 //TODO: make into a node?
 
     //form: <MONTH> <Num>[st|nd|rd|th] | <Num>[st|nd|rd|th] OF <MONTH>
     //Jan 10th, OR 20 OF January
@@ -48,6 +48,9 @@ class DateNode(dateString: String) : Node(dateString) {
         } catch (e: Exception) {
             throw ParseException("Invalid day of month in string given to DateNode: $dateString")
         }
+
+        // To Match the Java Library Convention, the first of the month is day 0
+        dayOfMonth -= 1
     }
 
     override fun interp(symbolTable: SymbolTable): SymbolTable {
@@ -57,7 +60,7 @@ class DateNode(dateString: String) : Node(dateString) {
     override fun equals(other: Any?): Boolean {
         return when (other) {
             is DateNode -> {
-                this.month!! == other.month &&
+                this.month == other.month &&
                 this.dayOfMonth == other.dayOfMonth
             }
             else -> false

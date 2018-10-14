@@ -146,8 +146,8 @@ class ForStatement(forString: String) : Statement(forString) {
             // Make a copy of the Statments so that things happening in this iteration of the FOR loop can't effect
             // things happening in the next
             val statementsCopy = statements.copy()
-            val nextStatements = statementsCopy.interp(symbolTableCopy)
-            out.addAll(nextStatements)
+            val interpStatements = statementsCopy.interp(symbolTableCopy)
+            out.addAll(interpStatements)
         }
 
         return out

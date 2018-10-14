@@ -100,8 +100,8 @@ class StatementList(statementsString: String) {
     fun interp(symbolTable: SymbolTable) : MutableList<ScheduleStatement> {
         val out: MutableList<ScheduleStatement> = mutableListOf()
         for (statement in statements) {
-            val nextStatements = statement.interp(symbolTable)
-            out.addAll(nextStatements)
+            val interpStatements = statement.interp(symbolTable)
+            out.addAll(interpStatements)
         }
 
         return out

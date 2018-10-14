@@ -30,8 +30,9 @@ class LetStatement(letString: String): Statement(letString) {
         }
     }
 
-    override fun interp(symbolTable: SymbolTable) {
+    override fun interp(symbolTable: SymbolTable) : MutableList<ScheduleStatement> {
         symbolTable.set(id.id, value)
+        return mutableListOf()
     }
 
     override fun equals(other: Any?): Boolean {

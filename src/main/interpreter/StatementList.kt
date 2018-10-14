@@ -97,10 +97,14 @@ class StatementList(statementsString: String) {
         statements.add(statement)
     }
 
-    fun interp(symbolTable: SymbolTable) {
+    fun interp(symbolTable: SymbolTable) : MutableList<ScheduleStatement> {
+        val out: MutableList<ScheduleStatement> = mutableListOf()
         for (statement in statements) {
-            statement.interp(symbolTable)
+            val interpStatements = statement.interp(symbolTable)
+            out.addAll(interpStatements)
         }
+
+        return out
     }
 
     override fun equals(other: Any?): Boolean {

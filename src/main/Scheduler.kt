@@ -1,4 +1,6 @@
+import interpreter.ScheduleStatement
 import interpreter.StatementList
+import interpreter.SymbolTable
 import io.constructICal
 import io.readFile
 import io.writeFile
@@ -40,9 +42,20 @@ class Scheduler {
                     return
                 }
 
+                val symbolTable = SymbolTable()
+
+                lateinit var interpretedStatements: MutableList<ScheduleStatement>
+                try {
+                    interpretedStatements = statements.interp(symbolTable)
+                } catch (e: Exception) {
+                    println("Error in interpreting statementList:")
+                    e.printStackTrace()
+                    return
+                }
+
                 lateinit var output: String
                 try {
-                    output = constructICal(statements)
+                    output = constructICal(interpretedStatements)
                 } catch(e: Exception) {
                     println("Error in constructing ICal output:")
                     e.printStackTrace()

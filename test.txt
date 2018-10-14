@@ -1,7 +1,1 @@
-Hello world
-This is a
-
-test
-
-
-FILE 123
+SCHEDULE Fencing AT 5 am DURATION 2 hours LOCATION UBC ON EVERY Sunday AND Monday UNTIL October 17th WITH leticia.c.nakajima@gmail.com

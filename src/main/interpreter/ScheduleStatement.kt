@@ -130,12 +130,6 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
         }
     }
 
-    // Substitute all variables in the given string and return the substituted string
-    fun subsituteVariables(str: String, symbolTable: SymbolTable): String {
-        // TODO
-        return str
-    }
-
     override fun interp(symbolTable: SymbolTable): SymbolTable {
         val substitutedScheduleString = subsituteVariables(savedScheduleString, symbolTable)
         parse(substitutedScheduleString)
@@ -185,6 +179,27 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
                 this.guests.contentDeepEquals(other.guests)
             }
             else -> false
+        }
+    }
+
+    companion object {
+        // Substitute all variables in the given string and return the substituted string
+        fun subsituteVariables(str: String, symbolTable: SymbolTable): String {
+            // Substitute all the variables in the symbol table
+            var mutableStr = str
+            for (symbol in symbolTable) {
+                val key = symbol.key
+                val value = symbol.value
+                val regex = Regex("\\\$" + key)
+                mutableStr = mutableStr.replace(regex, value)
+            }
+
+            // Check to make sure everything was substituted
+            if (mutableStr.contains('$')) {
+                throw InterpException("No known value for at least on variable in string passed to ScheduleStatement: $str")
+            }
+
+            return mutableStr
         }
     }
 }

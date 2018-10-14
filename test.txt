@@ -1,1 +1,10 @@
-SCHEDULE Fencing AT 5 am DURATION 2 hours LOCATION UBC ON EVERY Sunday AND Monday UNTIL October 17th WITH leticia.c.nakajima@gmail.com
+FOR $x IN {5 am, 10 am, 12 am}
+    LET $z = "EVERY Sunday AND Monday UNTIL October 17th"
+    FOR $y IN {UBC, SFU, UW}
+        SCHEDULE Fencing AT $x DURATION 2 hours LOCATION $y ON $z WITH leticia.c.nakajima@gmail.com
+    ENDFOR
+
+    FOR $y IN {UBC, SFU, UW}
+        SCHEDULE Fencing AT $x DURATION 2 hours LOCATION $y ON $z WITH leticia.c.nakajima@gmail.com
+    ENDFOR
+ENDFOR

@@ -87,14 +87,11 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
         dates = mutable_dates.toTypedArray()
     }
 
-    override fun interp(symbolTable: SymbolTable) {
+    override fun interp(symbolTable: SymbolTable) : MutableList<ScheduleStatement> {
         val substitutedScheduleString = subsituteVariables(savedScheduleString, symbolTable)
         parse(substitutedScheduleString)
 
-        // TODO: Delete me
-        println(this)
-
-        // TODO: Setup calendar stuff here (in it's own function please!!!!!!)
+        return mutableListOf(this)
     }
 
     override fun equals(other: Any?): Boolean {

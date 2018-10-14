@@ -135,7 +135,8 @@ class ForStatement(forString: String) : Statement(forString) {
         return null
     }
 
-    override fun interp(symbolTable: SymbolTable) {
+    override fun interp(symbolTable: SymbolTable) : MutableList<ScheduleStatement> {
+        val out: MutableList<ScheduleStatement> = mutableListOf()
         for (node_value in nodeSet.nodes) {
             // Make a copy of the symbol table so that anything happening in this FOR loop
             // can't effect scope outside the FOR loop
@@ -145,8 +146,11 @@ class ForStatement(forString: String) : Statement(forString) {
             // Make a copy of the Statments so that things happening in this iteration of the FOR loop can't effect
             // things happening in the next
             val statementsCopy = statements.copy()
-            statementsCopy.interp(symbolTableCopy)
+            val nextStatements = statementsCopy.interp(symbolTableCopy)
+            out.addAll(nextStatements)
         }
+
+        return out
     }
 
     override fun equals(other: Any?): Boolean {

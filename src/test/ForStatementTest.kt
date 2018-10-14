@@ -187,5 +187,4 @@ class ForStatementTest {
         }
     }
 
-    // TODO: test nested nodesets
 }

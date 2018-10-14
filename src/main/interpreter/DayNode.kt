@@ -23,8 +23,7 @@ class DayNode(dayString: String) : Node(dayString) {
     val day = determineCalendar(dayString)
 
 
-    override fun interp(symbolTable: SymbolTable): SymbolTable {
-        return symbolTable
+    override fun interp(symbolTable: SymbolTable) {
     }
 
 

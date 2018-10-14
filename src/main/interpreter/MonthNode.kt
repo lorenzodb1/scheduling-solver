@@ -26,8 +26,7 @@ class MonthNode(monthString: String) : Node(monthString) {
 
     val month = determineMonth(monthString)
 
-    override fun interp(symbolTable: SymbolTable): SymbolTable {
-        return symbolTable
+    override fun interp(symbolTable: SymbolTable) {
     }
 
     override fun equals(other: Any?): Boolean {

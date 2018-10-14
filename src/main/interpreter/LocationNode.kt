@@ -4,8 +4,7 @@ class LocationNode(locationString: String) : Node(locationString) {
 
     var location: String = locationString
 
-    override fun interp(symbolTable: SymbolTable): SymbolTable {
-        return symbolTable
+    override fun interp(symbolTable: SymbolTable) {
     }
 
     override fun equals(other: Any?): Boolean {

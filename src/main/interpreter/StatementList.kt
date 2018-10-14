@@ -4,6 +4,9 @@ class StatementList(statementsString: String) {
 
     var statements: MutableList<Statement> = mutableListOf()
 
+    // Save this for later so we can perform copying
+    var statementsString = statementsString;
+
     companion object {
         // We use this enum when tracking what statement we're in when
         // iterating over the given string during parsing
@@ -16,7 +19,7 @@ class StatementList(statementsString: String) {
     }
 
     init {
-        val tokens = statementsString.split(" ")
+        val tokens = statementsString.replace('\n', ' ').split(" ")
         val tokensIter = tokens.iterator().withIndex()
 
         // This tracks nest FOR loops so that we only split on the topmost level
@@ -94,8 +97,10 @@ class StatementList(statementsString: String) {
         statements.add(statement)
     }
 
-    fun interp(symbolTable: SymbolTable): SymbolTable {
-        return symbolTable
+    fun interp(symbolTable: SymbolTable) {
+        for (statement in statements) {
+            statement.interp(symbolTable)
+        }
     }
 
     override fun equals(other: Any?): Boolean {
@@ -103,5 +108,9 @@ class StatementList(statementsString: String) {
             is StatementList -> this.statements.equals(other.statements)
             else -> false
         }
+    }
+
+    fun copy(): StatementList {
+        return StatementList(statementsString)
     }
 }

@@ -135,8 +135,18 @@ class ForStatement(forString: String) : Statement(forString) {
         return null
     }
 
-    override fun interp(symbolTable: SymbolTable): SymbolTable {
-        TODO()
+    override fun interp(symbolTable: SymbolTable) {
+        for (node_value in nodeSet.nodes) {
+            // Make a copy of the symbol table so that anything happening in this FOR loop
+            // can't effect scope outside the FOR loop
+            val symbolTableCopy = symbolTable.copy()
+            symbolTableCopy.set(id.id, node_value)
+
+            // Make a copy of the Statments so that things happening in this iteration of the FOR loop can't effect
+            // things happening in the next
+            val statementsCopy = statements.copy()
+            statementsCopy.interp(symbolTableCopy)
+        }
     }
 
     override fun equals(other: Any?): Boolean {

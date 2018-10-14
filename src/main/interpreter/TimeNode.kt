@@ -105,8 +105,7 @@ class TimeNode(timeString: String) : Node(timeString) {
         return hour <= 24 && hour >= 0 && minute <= 60 && minute >= 0
     }
 
-    override fun interp(symbolTable: SymbolTable): SymbolTable {
-        return symbolTable
+    override fun interp(symbolTable: SymbolTable) {
     }
 
     override fun equals(other: Any?): Boolean {

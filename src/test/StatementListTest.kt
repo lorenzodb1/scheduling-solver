@@ -68,6 +68,28 @@ class StatementListTest {
     }
 
     @Test
+    fun constructStatementList_multiple_statements_wierd_spacing_and_line_endings() {
+        val statementListString = "   LET \$X =  5pm    \n    SCHEDULE dinner AT     \$X     FOR     \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X ENDFOR   "
+        val statementList = StatementList(statementListString)
+        assertArrayEquals(mutableListOf<Statement>(
+                LetStatement("LET \$X = 5pm"),
+                ScheduleStatement("SCHEDULE dinner AT \$X"),
+                ForStatement("FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X ENDFOR")
+        ).toTypedArray(), statementList.statements.toTypedArray())
+    }
+
+    @Test
+    fun constructStatementList_multiple_statements_line_ending_instead_of_space() {
+        val statementListString = "LET \$X = 5pm\nSCHEDULE dinner AT \$X FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X ENDFOR"
+        val statementList = StatementList(statementListString)
+        assertArrayEquals(mutableListOf<Statement>(
+                LetStatement("LET \$X = 5pm"),
+                ScheduleStatement("SCHEDULE dinner AT \$X"),
+                ForStatement("FOR \$X IN {5pm, 6pm} SCHEDULE dinner AT \$X ENDFOR")
+        ).toTypedArray(), statementList.statements.toTypedArray())
+    }
+
+    @Test
     fun constructStatementList_nested_FOR_loops() {
         val statementListString = "FOR \$X IN {5pm, 6pm} FOR \$Y IN {dinner, lunch} SCHEDULE \$Y AT \$X ENDFOR ENDFOR"
         val statementList = StatementList(statementListString)

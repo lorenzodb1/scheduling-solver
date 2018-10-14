@@ -7,6 +7,6 @@ abstract class Node(s: String) {
      *
      * Takes a symbol table and returns the symbol table with any updates
      */
-    abstract fun interp(symbolTable: SymbolTable): SymbolTable
+    abstract fun interp(symbolTable: SymbolTable)
 
 }

@@ -18,6 +18,14 @@ class DateNodeTest {
     }
 
     @Test
+    fun constructDateNode_negative_date() {
+        val dateString = "-2 of January"
+        val exception = assertThrows(ParseException::class.java) {
+            DateNode(dateString)
+        }
+    }
+
+    @Test
     fun constructDateNode_date_single_number_no_suffix_month_suffix() {
         val dateString = "2 of January"
         var dateNode = DateNode(dateString)

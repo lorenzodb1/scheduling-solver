@@ -53,8 +53,7 @@ class DateNode(dateString: String) : Node(dateString) {
         dayOfMonth -= 1
     }
 
-    override fun interp(symbolTable: SymbolTable): SymbolTable {
-        return symbolTable
+    override fun interp(symbolTable: SymbolTable) {
     }
 
     override fun equals(other: Any?): Boolean {

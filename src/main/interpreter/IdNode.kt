@@ -14,8 +14,7 @@ class IdNode(idString: String) : Node(idString) {
         id = trimmedIdString.substring(1)
     }
 
-    override fun interp(symbolTable: SymbolTable): SymbolTable {
-        TODO()
+    override fun interp(symbolTable: SymbolTable) {
     }
 
     // TODO: Lots of copy-pasta between `equals` methods, can we use DRY?

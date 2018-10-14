@@ -31,8 +31,8 @@ class LetStatement(letString: String): Statement(letString) {
         }
     }
 
-    override fun interp(symbolTable: SymbolTable): SymbolTable {
-        TODO()
+    override fun interp(symbolTable: SymbolTable) {
+        symbolTable.set(id.id, value)
     }
 
     override fun equals(other: Any?): Boolean {

@@ -15,6 +15,14 @@ class SymbolTable {
         table.clear()
     }
 
+    fun copy(): SymbolTable {
+        val symbolTableCopy = SymbolTable()
+        for (entry in table) {
+            symbolTableCopy.set(entry.key, entry.value)
+        }
+        return symbolTableCopy
+    }
+
     operator fun iterator(): MutableIterator<MutableMap.MutableEntry<String, String>> {
         return table.iterator()
     }

@@ -61,4 +61,17 @@ class DurationNodeTest {
         assertEquals(3, durationNode.minutes)
     }
 
+    @Test
+    fun constructDurationNode_1_minute() {
+        val durationString = "1 minute"
+        var durationNode = DurationNode(durationString)
+        assertEquals(1, durationNode.minutes)
+    }
+
+    @Test
+    fun constructDurationNode_1_hour() {
+        val durationString = "1 hour"
+        var durationNode = DurationNode(durationString)
+        assertEquals(60, durationNode.minutes)
+    }
 }

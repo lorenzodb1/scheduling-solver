@@ -34,7 +34,7 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
     // Parse the given SCHEDULE statement and populate member variables appropriately
     private fun parse(str: String) {
         val phrases = splitOnAndKeepWords(str, arrayOf(
-                "SCHEDULE", "AT", "FOR", "IN", "ON", "WITH"
+                "SCHEDULE", "AT", "DURATION", "LOCATION", "ON", "WITH"
         )).map { s -> s.split(' ') }
 
         // There must be at least two phrases, "SCHEDULE ..." and "AT ..."
@@ -60,14 +60,14 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
                                 "Duplicate AT statement found in string given to ScheduleStatement: $str")
                     }
                 }
-                "FOR" -> {
+                "DURATION" -> {
                     when (duration) {
                         null -> duration = DurationNode(phrase_tail)
                         else -> throw InterpException(
                                 "Duplicate FOR statement found in string given to ScheduleStatement: $str")
                     }
                 }
-                "IN" -> {
+                "LOCATION" -> {
                     when (location) {
                         null -> location = LocationNode(phrase_tail)
                         else -> throw InterpException(
@@ -87,10 +87,14 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
         dates = mutable_dates.toTypedArray()
     }
 
-    override fun interp(symbolTable: SymbolTable): SymbolTable {
+    override fun interp(symbolTable: SymbolTable) {
         val substitutedScheduleString = subsituteVariables(savedScheduleString, symbolTable)
         parse(substitutedScheduleString)
-        return symbolTable
+
+        // TODO: Delete me
+        println(this)
+
+        // TODO: Setup calendar stuff here (in it's own function please!!!!!!)
     }
 
     override fun equals(other: Any?): Boolean {
@@ -105,6 +109,26 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
             }
             else -> false
         }
+    }
+
+    override fun toString(): String {
+        var str = ""
+        // TODO: Delete me
+        str += "-----------\n"
+        str += "Description: " + description + "\n"
+        str += "Time: " + time?.hour + " hour(s), " + time?.minute + " minute(s)" + "\n"
+        str += "Duration (minutes): " + duration?.minutes + "\n"
+        str += "Location: " + location?.location + "\n"
+        str += "Dates: "
+        for (date in dates) {
+            str += date.toString() + ", "
+        }
+        str += "\n"
+        str += "Guests: "
+        for (guest in guests) {
+            str += guest.email + ", \n"
+        }
+        return str
     }
 
     companion object {

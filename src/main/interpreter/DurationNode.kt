@@ -21,14 +21,13 @@ class DurationNode(durationString: String) : Node(durationString) {
 
         val unitString = matches.groupValues[2]
         when (unitString) {
-            "hours" -> minutes = numericValue * 60
-            "minutes" -> minutes = numericValue * 1
+            "hours", "hour" -> minutes = numericValue * 60
+            "minutes", "minute" -> minutes = numericValue * 1
             else -> throw ParseException("Invalid units in string given to DurationNode: $durationString")
         }
     }
 
-    override fun interp(symbolTable: SymbolTable): SymbolTable {
-        return symbolTable
+    override fun interp(symbolTable: SymbolTable) {
     }
 
     override fun equals(other: Any?): Boolean {

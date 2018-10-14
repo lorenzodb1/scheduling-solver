@@ -20,7 +20,7 @@
 [x] TIME := <Num>[ ][AM|PM|am|pm]
 [x] (written, not tested) GUEST := <Any Valid Email>
 [x] LOCATION := <Any Valid Address>
-[ ] SCHEDULE := SCHEDULE <NODE> AT <NODE> [FOR <NODE>] [IN <NODE>] [ON [EVERY ]<NODE> [AND <NODE>]*  [UNTIL <NODE>]][WITH <NODE> [AND <NODE>]*]
+[ ] SCHEDULE := SCHEDULE <NODE> AT <NODE> [DURATION <NODE>] [LOCATION <NODE>] [ON [EVERY ]<NODE> [AND <NODE>]*  [UNTIL <NODE>]][WITH <NODE> [AND <NODE>]*]
 ```
 
 ## Notes From TA 
@@ -31,7 +31,7 @@
     - Segregate events so that guests can't see each other?
 
 ## Notes for Video
-- include "Rational Reconstruction": comparison of making a schedule in google calendar vs doing it in our language
+- include "Rational Reconstruction": comparison of making a schedule in google calendar/outlook/etc. vs doing it in our language
 - show off cool features:
     - variables
     - for loops
@@ -40,4 +40,15 @@
     - ability to add on optional extras to SCHEDULE in any order
     - several ways to setup complex calendars, can use multiple ON statements in given schedule call,
         - Can specify multiple ranges on SCHEDULE, ex: `SCHEDULE dinner AT 5pm ON EVERY Sunday AND Monday UNTIL December 1st ON Tuesday UNTIL December 4th`
-        - Can use FOR loops to generate multiple SCHEDULE statements
+        - Can use nested FOR loops to generate multiple SCHEDULE statements
+- reflect on what was learned from initial user study
+    - users actually wanted a less flowing, more structured language, made it easier to guess what to do
+    - wanted to be able to schedule multiple events
+- final user study
+    - need to do!!!  and need to include in video
+    - ask user to create a calendar with specific events with ranges, various dates, etc.
+    - ask whomever, need to get people to use the language.
+    - take quantifiable notes
+        - number of mistakes user made
+        - speed for user to make a given calendar in our language vs google calendar
+        - how helpful were error messages to the user?

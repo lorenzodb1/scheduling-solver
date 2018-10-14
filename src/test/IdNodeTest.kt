@@ -52,6 +52,14 @@ class IdNodeTest {
     }
 
     @Test
+    fun constructIdNode_spaces_in_id() {
+        var idString = "\$X Y"
+        val exception = assertThrows(ParseException::class.java) {
+            IdNode(idString)
+        }
+    }
+
+    @Test
     fun constructIdNode_missing_id() {
         var idString = "$"
         val exception = assertThrows(ParseException::class.java) {

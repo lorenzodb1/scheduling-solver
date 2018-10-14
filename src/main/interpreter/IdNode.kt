@@ -1,13 +1,13 @@
 package interpreter
 
-class IdNode(val idString: String) : Node(idString) {
+class IdNode(idString: String) : Node(idString) {
 
     var id: String;
 
     init {
         val trimmedIdString = idString.trim()
         // TODO: check if reserved word?
-        if (trimmedIdString.length < 2 || trimmedIdString[0] != '$'){
+        if (trimmedIdString.length < 2 || trimmedIdString[0] != '$' || trimmedIdString.contains(' ')){
             throw ParseException("Invalid string given to IdNode: \"$trimmedIdString\"")
         }
 

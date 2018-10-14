@@ -476,10 +476,10 @@ class ScheduleStatementTest {
     }
 
     // TODO: It would be good to fixup and use some of these larger tests, but not enough time right now.......
+
 //    @Test
 //    fun basic_example_with_all_elements() {
 //        val scheduleString = "SCHEDULE Fencing AT 5 am FOR 2 hours IN UBC ON EVERY Sunday AND Monday UNTIL October 17th WITH leticia.c.nakajima@gmail.com"
-//
 //        val scheduleStatement = ScheduleStatement(scheduleString)
 //
 //        assertEquals(("Fencing"), scheduleStatement.description)
@@ -488,24 +488,22 @@ class ScheduleStatementTest {
 //        assertEquals(LocationNode("UBC"), scheduleStatement.location)
 //        assertEquals(DateNode("october 14th, october 15th"), scheduleStatement.dates)
 //        assertEquals(GuestNode("leticia.c.nakajima@gmail.com"), scheduleStatement.guests)
-//
-//
 //    }
 //
-//        @Test
-//        fun time_written_a_little_differently() {
-//            val scheduleString = "SCHEDULE Fencing AT 5 AM FOR 2 hours IN UBC ON EVERY Monday AND Sunday UNTIL 2nd of November WITH leticia.c.nakajima@gmail.com"
+//    @Test
+//    fun time_written_a_little_differently() {
+//        val scheduleString = "SCHEDULE Fencing AT 5 AM FOR 2 hours IN UBC ON EVERY Monday AND Sunday UNTIL 2nd of November WITH leticia.c.nakajima@gmail.com"
 //
-//            val scheduleStatement = ScheduleStatement(scheduleString)
+//        val scheduleStatement = ScheduleStatement(scheduleString)
 //
-//            assertEquals(("Fencing"), scheduleStatement.description)
-//            assertEquals(TimeNode("5 AM"), scheduleStatement.time)
-//            assertEquals(DurationNode("2 hours"), scheduleStatement.duration)
-//            assertEquals(LocationNode("UBC"), scheduleStatement.location)
-//            assertEquals(DateNode("october 14th, october 15th"), scheduleStatement.dates)
-//            assertEquals(GuestNode("leticia.c.nakajima@gmail.com"), scheduleStatement.guests)
+//        assertEquals(("Fencing"), scheduleStatement.description)
+//        assertEquals(TimeNode("5 AM"), scheduleStatement.time)
+//        assertEquals(DurationNode("2 hours"), scheduleStatement.duration)
+//        assertEquals(LocationNode("UBC"), scheduleStatement.location)
+//        assertEquals(DateNode("october 14th, october 15th"), scheduleStatement.dates)
+//        assertEquals(GuestNode("leticia.c.nakajima@gmail.com"), scheduleStatement.guests)
 //
-//        }
+//    }
 //
 //    @Test
 //    fun no_duration_node() {
@@ -557,85 +555,6 @@ class ScheduleStatementTest {
 //        assertEquals(LocationNode("UBC"), scheduleStatement.location)
 //        assertEquals(DateNode("october 14th, october 15th"), scheduleStatement.dates)
 //    }
-
-    @Test
-    fun basic_example_with_all_elements() {
-        val scheduleString = "SCHEDULE Fencing AT 5 am FOR 2 hours IN UBC ON EVERY Sunday AND Monday UNTIL October 17th WITH leticia.c.nakajima@gmail.com"
-        val scheduleStatement = ScheduleStatement(scheduleString)
-
-        assertEquals(("Fencing"), scheduleStatement.description)
-        assertEquals(TimeNode("5 am"), scheduleStatement.time)
-        assertEquals(DurationNode("2 hours"), scheduleStatement.duration)
-        assertEquals(LocationNode("UBC"), scheduleStatement.location)
-        assertEquals(DateNode("october 14th, october 15th"), scheduleStatement.dates)
-        assertEquals(GuestNode("leticia.c.nakajima@gmail.com"), scheduleStatement.guests)
-    }
-
-    @Test
-    fun time_written_a_little_differently() {
-        val scheduleString = "SCHEDULE Fencing AT 5 AM FOR 2 hours IN UBC ON EVERY Monday AND Sunday UNTIL 2nd of November WITH leticia.c.nakajima@gmail.com"
-
-        val scheduleStatement = ScheduleStatement(scheduleString)
-
-        assertEquals(("Fencing"), scheduleStatement.description)
-        assertEquals(TimeNode("5 AM"), scheduleStatement.time)
-        assertEquals(DurationNode("2 hours"), scheduleStatement.duration)
-        assertEquals(LocationNode("UBC"), scheduleStatement.location)
-        assertEquals(DateNode("october 14th, october 15th"), scheduleStatement.dates)
-        assertEquals(GuestNode("leticia.c.nakajima@gmail.com"), scheduleStatement.guests)
-
-    }
-
-    @Test
-    fun no_duration_node() {
-        val scheduleString= "SCHEDULE Fencing AT 5 AM IN UBC ON EVERY Monday AND Sunday UNTIL 2nd of November WITH leticia.c.nakajima@gmail.com"
-
-        val scheduleStatement = ScheduleStatement(scheduleString)
-
-        assertEquals(("Fencing"), scheduleStatement.description)
-        assertEquals(TimeNode("5 AM"), scheduleStatement.time)
-        assertEquals(LocationNode("UBC"), scheduleStatement.location)
-        assertEquals(DateNode("october 14th, october 15th"), scheduleStatement.dates)
-        assertEquals(GuestNode("leticia.c.nakajima@gmail.com"), scheduleStatement.guests)
-    }
-
-    @Test
-    fun no_location_node() {
-        val scheduleString = "SCHEDULE Fencing AT 5 AM FOR 2 hours ON EVERY Monday AND Sunday UNTIL 2nd of November WITH leticia.c.nakajima@gmail.com"
-
-        val scheduleStatement = ScheduleStatement(scheduleString)
-
-        assertEquals(("Fencing"), scheduleStatement.description)
-        assertEquals(TimeNode("5 AM"), scheduleStatement.time)
-        assertEquals(DurationNode("2 hours"), scheduleStatement.duration)
-        assertEquals(DateNode("october 14th, october 15th"), scheduleStatement.dates)
-        assertEquals(GuestNode("leticia.c.nakajima@gmail.com"), scheduleStatement.guests)
-    }
-
-    @Test
-    fun no_dates_node() {
-        val scheduleString = "SCHEDULE Fencing AT 5 AM FOR 2 hours IN UBC WITH leticia.c.nakajima@gmail.com"
-
-        val scheduleStatement = ScheduleStatement(scheduleString)
-
-        assertEquals(("Fencing"), scheduleStatement.description)
-        assertEquals(TimeNode("5 AM"), scheduleStatement.time)
-        assertEquals(DurationNode("2 hours"), scheduleStatement.duration)
-        assertEquals(LocationNode("UBC"), scheduleStatement.location)
-        assertEquals(GuestNode("leticia.c.nakajima@gmail.com"), scheduleStatement.guests)
-    }
-
-    @Test
-    fun no_guest_node() {
-        val scheduleString = "SCHEDULE Fencing AT 5 AM FOR 2 hours IN UBC ON EVERY Monday AND Sunday UNTIL 2nd of November"
-
-        val scheduleStatement = ScheduleStatement(scheduleString)
-        assertEquals(("Fencing"), scheduleStatement.description)
-        assertEquals(TimeNode("5 AM"), scheduleStatement.time)
-        assertEquals(DurationNode("2 hours"), scheduleStatement.duration)
-        assertEquals(LocationNode("UBC"), scheduleStatement.location)
-        assertEquals(DateNode("october 14th, october 15th"), scheduleStatement.dates)
-    }
 
     //add more specific format tests
 }

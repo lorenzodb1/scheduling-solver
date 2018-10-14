@@ -78,10 +78,4 @@ class LetStatementTest {
         }
     }
 
-    @Test
-    fun constructIdNode_lower_case_monday() {
-        val dayString = "monday"
-        val dayNode = DayNode(dayString)
-        assertEquals(DayNode.Companion.Day.MONDAY, dayNode.day)
-    }
 }

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestInstance
+import java.util.Calendar
 
 
 
@@ -30,35 +31,35 @@ class MonthNodeTest {
     fun constructIdNode_lower_case_january() {
         val monthString = "january"
         var monthNode = MonthNode(monthString)
-        assertEquals(MonthNode.Companion.Month.JANUARY, monthNode.month)
+        assertEquals(Calendar.JANUARY, monthNode.month)
     }
 
     @Test
     fun constructIdNode_wierd_spacing() {
         val monthString = "   january  "
         var monthNode = MonthNode(monthString)
-        assertEquals(MonthNode.Companion.Month.JANUARY, monthNode.month)
+        assertEquals(Calendar.JANUARY, monthNode.month)
     }
 
     @Test
     fun constructIdNode_lower_case_january_abbreviated() {
         val monthString = "jan"
         var monthNode = MonthNode(monthString)
-        assertEquals(MonthNode.Companion.Month.JANUARY, monthNode.month)
+        assertEquals(Calendar.JANUARY, monthNode.month)
     }
 
     @Test
     fun constructIdNode_upper_case_january() {
         val monthString = "January"
         var monthNode = MonthNode(monthString)
-        assertEquals(MonthNode.Companion.Month.JANUARY, monthNode.month)
+        assertEquals(Calendar.JANUARY, monthNode.month)
     }
 
     @Test
     fun constructIdNode_lower_case_february() {
         val monthString = "february"
         var monthNode = MonthNode(monthString)
-        assertEquals(MonthNode.Companion.Month.FEBRUARY, monthNode.month)
+        assertEquals(Calendar.FEBRUARY, monthNode.month)
     }
 
 }

@@ -1,13 +1,7 @@
-import interpreter.Node
-import interpreter.DateNode
+import java.time.LocalDateTime
 
 class CurrentDate {
     companion object {
-        fun getDate(): DateNode {
-            return DateNode("Oct 12th")
-        }
-        fun getYear(): Int {
-            return 2018
-        }
+        var date = java.util.Date()
     }
 }

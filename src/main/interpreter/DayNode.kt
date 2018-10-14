@@ -1,34 +1,26 @@
 package interpreter
 
+import java.util.Calendar
+
 class DayNode(dayString: String) : Node(dayString) {
 
     companion object {
 
-        enum class Day {
-            MONDAY,
-            TUESDAY,
-            WEDNESDAY,
-            THURSDAY,
-            FRIDAY,
-            SATURDAY,
-            SUNDAY
-        }
-
-        fun determineDay(dayString: String) : Day {
+        fun determineCalendar(dayString: String) : Int {
             return when (dayString.trim().toLowerCase()) {
-                "monday", "mon" -> Day.MONDAY
-                "tuesday", "tues" -> Day.TUESDAY
-                "wednesday", "wed" -> Day.WEDNESDAY
-                "thursday", "thur", "thurs" -> Day.THURSDAY
-                "friday", "fri" -> Day.THURSDAY
-                "saturday", "sat" -> Day.THURSDAY
-                "sunday", "sun" -> Day.THURSDAY
-                else -> throw ParseException("Invalid string given to DayNode: \"$dayString\"")
+                "monday", "mon" -> Calendar.MONDAY
+                "tuesday", "tues" -> Calendar.TUESDAY
+                "wednesday", "wed" -> Calendar.WEDNESDAY
+                "thursday", "thur", "thurs" -> Calendar.THURSDAY
+                "friday", "fri" -> Calendar.FRIDAY
+                "saturday", "sat" -> Calendar.SATURDAY
+                "sunday", "sun" -> Calendar.SUNDAY
+                else -> throw ParseException("Invalid string given to CalendarNode: \"$dayString\"")
             }
         }
     }
 
-    val day = determineDay(dayString)
+    val day = determineCalendar(dayString)
 
 
     override fun interp(symbolTable: SymbolTable): SymbolTable {

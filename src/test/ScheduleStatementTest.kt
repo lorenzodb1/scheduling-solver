@@ -277,8 +277,9 @@ class ScheduleStatementTest {
         assertArrayEquals(arrayOf<GuestNode>(), scheduleStatement.guests)
     }
 
+    @Test
     fun interp_description_and_time_and_repeat_dates_multiple_weekdays() {
-        val scheduleString = "SCHEDULE dinner AT 5pm ON EVERY Tuesday EVERY Sunday AND Monday UNTIL October November 1st"
+        val scheduleString = "SCHEDULE dinner AT 5pm ON EVERY Tuesday AND Sunday AND Monday UNTIL December 1st"
         val scheduleStatement = ScheduleStatement(scheduleString)
         var symbolTable = SymbolTable()
         scheduleStatement.interp(symbolTable)
@@ -288,13 +289,36 @@ class ScheduleStatementTest {
         assertEquals(null, scheduleStatement.duration)
         assertEquals(null, scheduleStatement.location)
         assertArrayEquals(arrayOf<java.util.Date>(
-                Date(2018, 10, 14),
-                Date(2018, 10, 15),
-                Date(2018, 10, 21),
-                Date(2018, 10, 22),
-                Date(2018, 10, 28),
-                Date(2018, 10, 29)
+                Date(2018, 10, 17),
+                Date(2018, 10, 18),
+                Date(2018, 10, 19),
+                Date(2018, 10, 24),
+                Date(2018, 10, 25),
+                Date(2018, 10, 26)
                 ), scheduleStatement.dates)
+        assertArrayEquals(arrayOf<GuestNode>(), scheduleStatement.guests)
+    }
+
+    @Test
+    fun interp_description_and_time_and_repeat_dates_multiple_weekdays_multiple_ON_statements() {
+        val scheduleString = "SCHEDULE dinner AT 5pm ON EVERY Sunday AND Monday UNTIL December 1st ON Tuesday UNTIL December 4th"
+        val scheduleStatement = ScheduleStatement(scheduleString)
+        var symbolTable = SymbolTable()
+        scheduleStatement.interp(symbolTable)
+
+        assertEquals("dinner", scheduleStatement.description)
+        assertEquals(TimeNode("5pm"), scheduleStatement.time)
+        assertEquals(null, scheduleStatement.duration)
+        assertEquals(null, scheduleStatement.location)
+        assertArrayEquals(arrayOf<java.util.Date>(
+                Date(2018, 10, 17),
+                Date(2018, 10, 18),
+                Date(2018, 10, 19),
+                Date(2018, 10, 24),
+                Date(2018, 10, 25),
+                Date(2018, 10, 26),
+                Date(2018, 11, 3)
+        ), scheduleStatement.dates)
         assertArrayEquals(arrayOf<GuestNode>(), scheduleStatement.guests)
     }
 
@@ -333,6 +357,23 @@ class ScheduleStatementTest {
         ), scheduleStatement.guests)
     }
 
+    @Test
+    fun interp_description_and_time_and_multiple_guests_multiple_WITH_statements() {
+        val scheduleString = "SCHEDULE dinner AT 5pm WITH asdf@asdf.com WITH l33thAx0r@russia.ru"
+        val scheduleStatement = ScheduleStatement(scheduleString)
+        var symbolTable = SymbolTable()
+        scheduleStatement.interp(symbolTable)
+
+        assertEquals("dinner", scheduleStatement.description)
+        assertEquals(TimeNode("5pm"), scheduleStatement.time)
+        assertEquals(null, scheduleStatement.duration)
+        assertEquals(null, scheduleStatement.location)
+        assertArrayEquals(arrayOf<java.util.Date>(), scheduleStatement.dates)
+        assertArrayEquals(arrayOf<GuestNode>(
+                GuestNode("asdf@asdf.com"),
+                GuestNode("l33thAx0r@russia.ru")
+        ), scheduleStatement.guests)
+    }
     @Test
     fun interp_description_time_and_duration_and_location() {
         val scheduleString = "SCHEDULE dinner AT 5pm FOR 23 hours IN Huge Dumpster"

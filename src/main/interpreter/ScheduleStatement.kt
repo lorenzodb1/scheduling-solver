@@ -80,45 +80,17 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
                         "This probably means there's something wrong with the code"
             }
         }
+
+        // Sort the dates to make testing nice
+        val mutable_dates = dates.toMutableList()
+        sort(mutable_dates)
+        dates = mutable_dates.toTypedArray()
     }
 
     override fun interp(symbolTable: SymbolTable): SymbolTable {
         val substitutedScheduleString = subsituteVariables(savedScheduleString, symbolTable)
         parse(substitutedScheduleString)
         return symbolTable
-    }
-
-    // TODO: Delete these two functions if not used or move to util class and remove from ForStatement to stop DRY
-    /**
-     * Keeps iterating until it hits a non-empty string or the end
-     *
-     * If the non-empty string is the given keyword (ignoring leading and trailing spaces),
-     * then returns true, else returns false
-     */
-    private fun iterateOverWhitespace(iter: Iterator<IndexedValue<String>>, keyword: String): Boolean {
-        while (iter.hasNext()){
-            val currentToken = iter.next().value
-            if (currentToken.trim() != "") {
-                return currentToken.trim() == keyword
-            }
-        }
-        return false
-    }
-
-    /**
-     * Keeps iterating until it hits a non-empty string or the end
-     *
-     * Returns the first non-empty string with the index (index, token) or null if at the end
-     */
-
-    private fun iterateOverWhitespace(iter: Iterator<IndexedValue<String>>): IndexedValue<String>? {
-        while (iter.hasNext()) {
-            val (currentIndex, currentToken) = iter.next()
-            if (currentToken.trim() != "") {
-                return IndexedValue(currentIndex, currentToken)
-            }
-        }
-        return null
     }
 
     override fun equals(other: Any?): Boolean {

@@ -31,6 +31,14 @@ class LetStatementTest {
     }
 
     @Test
+    fun constructLetStatement_value_with_spaces() {
+        val letString = "LET \$x = dinner at the hauge"
+        val letStatement = LetStatement(letString);
+        assertEquals(IdNode("\$x"), letStatement.id)
+        assertEquals("dinner at the hauge", letStatement.value)
+    }
+
+    @Test
     fun constructLetStatement_missing_LET() {
         val letString =  "\$X = test"
         assertThrows(ParseException::class.java) {

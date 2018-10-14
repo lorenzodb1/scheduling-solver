@@ -20,14 +20,13 @@ class LetStatement(letString: String): Statement(letString) {
         id = IdNode(letTokens[1])
 
         // Parse the value
-        val valueTokens = tokens[1].trim().split(' ')
-        if (valueTokens.size != 1){
-            throw ParseException("Spaces in value in string passed to LetStatement: \"$letString\"")
-        }
-        value = valueTokens[0]
+        value = tokens[1].trim()
 
         if (value.contains('$')) {
             throw ParseException("Value given to LetStatement contains forbidden character '\$': \"$letString\"")
+        }
+        if (value == "") {
+            throw ParseException("Empty value in string given to given to LetStatement: \"$letString\"")
         }
     }
 

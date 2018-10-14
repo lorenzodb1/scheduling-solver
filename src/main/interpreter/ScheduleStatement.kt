@@ -16,7 +16,7 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
 
     // The string representation of ScheduleStatement that we're passed at parse time.
     // We hold this and delay parsing until interp. time so that we can do variable substitution first
-    lateinit var savedScheduleString: String
+    var savedScheduleString: String
 
     var description: String? = null
     var time: TimeNode? = null

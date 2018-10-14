@@ -10,9 +10,6 @@ import java.util.*
 @TestInstance(TestInstance.Lifecycle.PER_CLASS) // This annotation is required for @BeforeAll to work
 class ScheduleStatementTest {
 
-    // TODO: delete me
-    //[ ] SCHEDULE := SCHEDULE <NODE> AT <NODE> [FOR <NODE>] [AT LOCATION <NODE>] [ON [EVERY ]<NODE> [AND <NODE>]*  [UNTIL <NODE>]][WITH (<NODE>|<NODESET>)]
-
     @BeforeEach
     fun beforeEach() {
         // Set the date to a static value for testing purposes
@@ -30,7 +27,7 @@ class ScheduleStatementTest {
 
     @Test
     fun substituteVariables_no_variables_wierd_spacing(){
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         val str = "This is some text,    SCHEDULE       Fencing AT 5 am"
         val substitutedStr = ScheduleStatement.subsituteVariables(str, symbolTable)
         assertEquals(str, substitutedStr)
@@ -38,7 +35,7 @@ class ScheduleStatementTest {
 
     @Test
     fun substituteVariables_one_variable_nothing_else(){
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         symbolTable.set("X", "hello world!")
         val str = "\$X"
         val substitutedStr = ScheduleStatement.subsituteVariables(str, symbolTable)
@@ -47,7 +44,7 @@ class ScheduleStatementTest {
 
     @Test
     fun substituteVariables_two_same_variables_nothing_else(){
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         symbolTable.set("X", "hello world! ")
         val str = "\$X\$X"
         val substitutedStr = ScheduleStatement.subsituteVariables(str, symbolTable)
@@ -56,7 +53,7 @@ class ScheduleStatementTest {
 
     @Test
     fun substituteVariables_unused_variables_in_symbol_table(){
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         symbolTable.set("X", "hello world!")
         symbolTable.set("Z", "unused!")
         val str = "\$X"
@@ -66,7 +63,7 @@ class ScheduleStatementTest {
 
     @Test
     fun substituteVariables_two_different_variables_nothing_else(){
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         symbolTable.set("X", "hello world! ")
         symbolTable.set("Y", "SCHEDULE")
         val str = "\$X\$Y"
@@ -76,7 +73,7 @@ class ScheduleStatementTest {
 
     @Test
     fun substituteVariables_one_variable_in_text(){
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         symbolTable.set("Y", "Sleeper Service")
         val str = "GSV - \$Y"
         val substitutedStr = ScheduleStatement.subsituteVariables(str, symbolTable)
@@ -85,7 +82,7 @@ class ScheduleStatementTest {
 
     @Test
     fun substituteVariables_multiple_variables_in_text(){
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         symbolTable.set("X", "5pm")
         symbolTable.set("Y", "dinner")
         val str = "SCHEDULE \$Y AT \$X"
@@ -95,7 +92,7 @@ class ScheduleStatementTest {
 
     @Test
     fun substituteVariables_one_variable_not_in_symbol_table(){
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         symbolTable.set("Y", "dinner")
         val str = "SCHEDULE \$Z AT 5pm"
         val exception = assertThrows(InterpException::class.java) {
@@ -105,7 +102,7 @@ class ScheduleStatementTest {
 
     @Test
     fun substituteVariables_multiple_variables_one_not_in_symbol_table(){
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         symbolTable.set("Y", "dinner")
         val str = "SCHEDULE \$Y AT \$X"
         val exception = assertThrows(InterpException::class.java) {
@@ -115,7 +112,7 @@ class ScheduleStatementTest {
 
     @Test
     fun substituteVariables_multiple_variables_all_not_in_symbol_table(){
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         symbolTable.set("Z", "dinner")
         val str = "SCHEDULE \$Y AT \$X"
         val exception = assertThrows(InterpException::class.java) {
@@ -142,7 +139,7 @@ class ScheduleStatementTest {
     fun interp_missing_SCHEDULE_keyword() {
         val scheduleString = "dinner AT 5pm"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         val exception = assertThrows(InterpException::class.java) {
             scheduleStatement.interp(symbolTable)
         }
@@ -152,7 +149,7 @@ class ScheduleStatementTest {
     fun interp_missing_description() {
         val scheduleString = "SCHEDULE AT 5pm"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         val exception = assertThrows(InterpException::class.java) {
             scheduleStatement.interp(symbolTable)
         }
@@ -162,7 +159,7 @@ class ScheduleStatementTest {
     fun interp_missing_entire_AT_expression() {
         val scheduleString = "SCHEDULE dinner"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         val exception = assertThrows(InterpException::class.java) {
             scheduleStatement.interp(symbolTable)
         }
@@ -172,7 +169,7 @@ class ScheduleStatementTest {
     fun interp_missing_AT_value() {
         val scheduleString = "SCHEDULE dinner AT"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         val exception = assertThrows(ParseException::class.java) {
             scheduleStatement.interp(symbolTable)
         }
@@ -182,7 +179,7 @@ class ScheduleStatementTest {
     fun interp_description_and_time() {
         val scheduleString = "SCHEDULE dinner AT 5pm"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         scheduleStatement.interp(symbolTable)
 
         assertEquals("dinner", scheduleStatement.description)
@@ -197,7 +194,7 @@ class ScheduleStatementTest {
     fun interp_description_time_and_duration() {
         val scheduleString = "SCHEDULE dinner AT 5pm FOR 2 hours"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         scheduleStatement.interp(symbolTable)
 
         assertEquals("dinner", scheduleStatement.description)
@@ -212,7 +209,7 @@ class ScheduleStatementTest {
     fun interp_description_and_time_location() {
         val scheduleString = "SCHEDULE dinner AT 5pm IN thunderbird field"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         scheduleStatement.interp(symbolTable)
 
         assertEquals("dinner", scheduleStatement.description)
@@ -227,7 +224,7 @@ class ScheduleStatementTest {
     fun interp_description_and_time_and_date() {
         val scheduleString = "SCHEDULE dinner AT 5pm ON April 5th"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         scheduleStatement.interp(symbolTable)
 
         assertEquals("dinner", scheduleStatement.description)
@@ -244,7 +241,7 @@ class ScheduleStatementTest {
     fun interp_description_and_time_and_specific_dates() {
         val scheduleString = "SCHEDULE dinner AT 5pm ON April 5th AND March 3rd AND December 20th"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         scheduleStatement.interp(symbolTable)
 
         assertEquals("dinner", scheduleStatement.description)
@@ -263,7 +260,7 @@ class ScheduleStatementTest {
     fun interp_description_and_time_and_repeat_dates() {
         val scheduleString = "SCHEDULE dinner AT 5pm ON EVERY Tuesday UNTIL December 1st"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         scheduleStatement.interp(symbolTable)
 
         assertEquals("dinner", scheduleStatement.description)
@@ -281,7 +278,7 @@ class ScheduleStatementTest {
     fun interp_description_and_time_and_repeat_dates_multiple_weekdays() {
         val scheduleString = "SCHEDULE dinner AT 5pm ON EVERY Tuesday AND Sunday AND Monday UNTIL December 1st"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         scheduleStatement.interp(symbolTable)
 
         assertEquals("dinner", scheduleStatement.description)
@@ -326,7 +323,7 @@ class ScheduleStatementTest {
     fun interp_description_and_time_and_single_guest() {
         val scheduleString = "SCHEDULE dinner AT 5pm WITH asdf@asdf.com"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         scheduleStatement.interp(symbolTable)
 
         assertEquals("dinner", scheduleStatement.description)
@@ -343,7 +340,7 @@ class ScheduleStatementTest {
     fun interp_description_and_time_and_multiple_guests() {
         val scheduleString = "SCHEDULE dinner AT 5pm WITH asdf@asdf.com AND l33thAx0r@russia.ru"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         scheduleStatement.interp(symbolTable)
 
         assertEquals("dinner", scheduleStatement.description)
@@ -378,7 +375,7 @@ class ScheduleStatementTest {
     fun interp_description_time_and_duration_and_location() {
         val scheduleString = "SCHEDULE dinner AT 5pm FOR 23 hours IN Huge Dumpster"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         scheduleStatement.interp(symbolTable)
 
         assertEquals("dinner", scheduleStatement.description)
@@ -393,7 +390,7 @@ class ScheduleStatementTest {
     fun interp_description_time_and_location_and_duration() {
         val scheduleString = "SCHEDULE dinner AT 5pm IN Huge Dumpster FOR 2 hours"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         scheduleStatement.interp(symbolTable)
 
         assertEquals("dinner", scheduleStatement.description)
@@ -408,7 +405,7 @@ class ScheduleStatementTest {
     fun interp_giant_example_1() {
         val scheduleString = "SCHEDULE Fencing AT 5 am FOR 2 hours IN UBC ON EVERY Tuesday AND Wednesday UNTIL December 5th WITH leticia.c.nakajima@gmail.com"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         scheduleStatement.interp(symbolTable)
 
         assertEquals("Fencing", scheduleStatement.description)
@@ -433,7 +430,7 @@ class ScheduleStatementTest {
     fun interp_description_and_time_single_variable() {
         val scheduleString = "SCHEDULE dinner AT \$X"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         symbolTable.set("X", "5pm")
         scheduleStatement.interp(symbolTable)
 
@@ -449,7 +446,7 @@ class ScheduleStatementTest {
     fun interp_description_and_time_multiple_variables() {
         val scheduleString = "SCHEDULE \$Y AT \$X"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         symbolTable.set("X", "5pm")
         symbolTable.set("Y", "dinner")
         scheduleStatement.interp(symbolTable)
@@ -466,7 +463,7 @@ class ScheduleStatementTest {
     fun interp_description_and_time_variable_with_spaces() {
         val scheduleString = "SCHEDULE \$Y AT 5pm"
         val scheduleStatement = ScheduleStatement(scheduleString)
-        var symbolTable = SymbolTable()
+        val symbolTable = SymbolTable()
         symbolTable.set("Y", "a trip with GSV Little Rascal")
         scheduleStatement.interp(symbolTable)
 
@@ -483,7 +480,7 @@ class ScheduleStatementTest {
 //    fun basic_example_with_all_elements() {
 //        val scheduleString = "SCHEDULE Fencing AT 5 am FOR 2 hours IN UBC ON EVERY Sunday AND Monday UNTIL October 17th WITH leticia.c.nakajima@gmail.com"
 //
-//        val scheduleStatement = ScheduleStatement(scheduleString);
+//        val scheduleStatement = ScheduleStatement(scheduleString)
 //
 //        assertEquals(("Fencing"), scheduleStatement.description)
 //        assertEquals(TimeNode("5 am"), scheduleStatement.time)
@@ -499,7 +496,7 @@ class ScheduleStatementTest {
 //        fun time_written_a_little_differently() {
 //            val scheduleString = "SCHEDULE Fencing AT 5 AM FOR 2 hours IN UBC ON EVERY Monday AND Sunday UNTIL 2nd of November WITH leticia.c.nakajima@gmail.com"
 //
-//            val scheduleStatement = ScheduleStatement(scheduleString);
+//            val scheduleStatement = ScheduleStatement(scheduleString)
 //
 //            assertEquals(("Fencing"), scheduleStatement.description)
 //            assertEquals(TimeNode("5 AM"), scheduleStatement.time)
@@ -514,7 +511,7 @@ class ScheduleStatementTest {
 //    fun no_duration_node() {
 //        val scheduleString= "SCHEDULE Fencing AT 5 AM IN UBC ON EVERY Monday AND Sunday UNTIL 2nd of November WITH leticia.c.nakajima@gmail.com"
 //
-//        val scheduleStatement = ScheduleStatement(scheduleString);
+//        val scheduleStatement = ScheduleStatement(scheduleString)
 //
 //        assertEquals(("Fencing"), scheduleStatement.description)
 //        assertEquals(TimeNode("5 AM"), scheduleStatement.time)
@@ -527,7 +524,7 @@ class ScheduleStatementTest {
 //    fun no_location_node() {
 //        val scheduleString = "SCHEDULE Fencing AT 5 AM FOR 2 hours ON EVERY Monday AND Sunday UNTIL 2nd of November WITH leticia.c.nakajima@gmail.com"
 //
-//        val scheduleStatement = ScheduleStatement(scheduleString);
+//        val scheduleStatement = ScheduleStatement(scheduleString)
 //
 //        assertEquals(("Fencing"), scheduleStatement.description)
 //        assertEquals(TimeNode("5 AM"), scheduleStatement.time)
@@ -540,7 +537,7 @@ class ScheduleStatementTest {
 //    fun no_dates_node() {
 //        val scheduleString = "SCHEDULE Fencing AT 5 AM FOR 2 hours IN UBC WITH leticia.c.nakajima@gmail.com"
 //
-//        val scheduleStatement = ScheduleStatement(scheduleString);
+//        val scheduleStatement = ScheduleStatement(scheduleString)
 //
 //        assertEquals(("Fencing"), scheduleStatement.description)
 //        assertEquals(TimeNode("5 AM"), scheduleStatement.time)
@@ -553,7 +550,7 @@ class ScheduleStatementTest {
 //    fun no_guest_node() {
 //        val scheduleString = "SCHEDULE Fencing AT 5 AM FOR 2 hours IN UBC ON EVERY Monday AND Sunday UNTIL 2nd of November"
 //
-//        val scheduleStatement = ScheduleStatement(scheduleString);
+//        val scheduleStatement = ScheduleStatement(scheduleString)
 //        assertEquals(("Fencing"), scheduleStatement.description)
 //        assertEquals(TimeNode("5 AM"), scheduleStatement.time)
 //        assertEquals(DurationNode("2 hours"), scheduleStatement.duration)
@@ -561,7 +558,84 @@ class ScheduleStatementTest {
 //        assertEquals(DateNode("october 14th, october 15th"), scheduleStatement.dates)
 //    }
 
+    @Test
+    fun basic_example_with_all_elements() {
+        val scheduleString = "SCHEDULE Fencing AT 5 am FOR 2 hours IN UBC ON EVERY Sunday AND Monday UNTIL October 17th WITH leticia.c.nakajima@gmail.com"
+        val scheduleStatement = ScheduleStatement(scheduleString)
+
+        assertEquals(("Fencing"), scheduleStatement.description)
+        assertEquals(TimeNode("5 am"), scheduleStatement.time)
+        assertEquals(DurationNode("2 hours"), scheduleStatement.duration)
+        assertEquals(LocationNode("UBC"), scheduleStatement.location)
+        assertEquals(DateNode("october 14th, october 15th"), scheduleStatement.dates)
+        assertEquals(GuestNode("leticia.c.nakajima@gmail.com"), scheduleStatement.guests)
+    }
+
+    @Test
+    fun time_written_a_little_differently() {
+        val scheduleString = "SCHEDULE Fencing AT 5 AM FOR 2 hours IN UBC ON EVERY Monday AND Sunday UNTIL 2nd of November WITH leticia.c.nakajima@gmail.com"
+
+        val scheduleStatement = ScheduleStatement(scheduleString)
+
+        assertEquals(("Fencing"), scheduleStatement.description)
+        assertEquals(TimeNode("5 AM"), scheduleStatement.time)
+        assertEquals(DurationNode("2 hours"), scheduleStatement.duration)
+        assertEquals(LocationNode("UBC"), scheduleStatement.location)
+        assertEquals(DateNode("october 14th, october 15th"), scheduleStatement.dates)
+        assertEquals(GuestNode("leticia.c.nakajima@gmail.com"), scheduleStatement.guests)
+
+    }
+
+    @Test
+    fun no_duration_node() {
+        val scheduleString= "SCHEDULE Fencing AT 5 AM IN UBC ON EVERY Monday AND Sunday UNTIL 2nd of November WITH leticia.c.nakajima@gmail.com"
+
+        val scheduleStatement = ScheduleStatement(scheduleString)
+
+        assertEquals(("Fencing"), scheduleStatement.description)
+        assertEquals(TimeNode("5 AM"), scheduleStatement.time)
+        assertEquals(LocationNode("UBC"), scheduleStatement.location)
+        assertEquals(DateNode("october 14th, october 15th"), scheduleStatement.dates)
+        assertEquals(GuestNode("leticia.c.nakajima@gmail.com"), scheduleStatement.guests)
+    }
+
+    @Test
+    fun no_location_node() {
+        val scheduleString = "SCHEDULE Fencing AT 5 AM FOR 2 hours ON EVERY Monday AND Sunday UNTIL 2nd of November WITH leticia.c.nakajima@gmail.com"
+
+        val scheduleStatement = ScheduleStatement(scheduleString)
+
+        assertEquals(("Fencing"), scheduleStatement.description)
+        assertEquals(TimeNode("5 AM"), scheduleStatement.time)
+        assertEquals(DurationNode("2 hours"), scheduleStatement.duration)
+        assertEquals(DateNode("october 14th, october 15th"), scheduleStatement.dates)
+        assertEquals(GuestNode("leticia.c.nakajima@gmail.com"), scheduleStatement.guests)
+    }
+
+    @Test
+    fun no_dates_node() {
+        val scheduleString = "SCHEDULE Fencing AT 5 AM FOR 2 hours IN UBC WITH leticia.c.nakajima@gmail.com"
+
+        val scheduleStatement = ScheduleStatement(scheduleString)
+
+        assertEquals(("Fencing"), scheduleStatement.description)
+        assertEquals(TimeNode("5 AM"), scheduleStatement.time)
+        assertEquals(DurationNode("2 hours"), scheduleStatement.duration)
+        assertEquals(LocationNode("UBC"), scheduleStatement.location)
+        assertEquals(GuestNode("leticia.c.nakajima@gmail.com"), scheduleStatement.guests)
+    }
+
+    @Test
+    fun no_guest_node() {
+        val scheduleString = "SCHEDULE Fencing AT 5 AM FOR 2 hours IN UBC ON EVERY Monday AND Sunday UNTIL 2nd of November"
+
+        val scheduleStatement = ScheduleStatement(scheduleString)
+        assertEquals(("Fencing"), scheduleStatement.description)
+        assertEquals(TimeNode("5 AM"), scheduleStatement.time)
+        assertEquals(DurationNode("2 hours"), scheduleStatement.duration)
+        assertEquals(LocationNode("UBC"), scheduleStatement.location)
+        assertEquals(DateNode("october 14th, october 15th"), scheduleStatement.dates)
+    }
+
     //add more specific format tests
-
-
 }

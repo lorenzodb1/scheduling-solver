@@ -37,7 +37,7 @@ class StatementListTest {
         val statementList = StatementList(statementListString)
         val expectedStatements = mutableListOf(
                 ScheduleStatement("SCHEDULE dinner AT \$X")
-        ).toTypedArray();
+        ).toTypedArray()
         val actualStatements = statementList.statements.toTypedArray()
         //assertTrue(expectedStatements.contentEquals(actualStatements))
         assertArrayEquals(mutableListOf(

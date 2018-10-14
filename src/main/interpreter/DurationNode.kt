@@ -1,5 +1,7 @@
 package interpreter
 
+import biweekly.util.Duration
+
 class DurationNode(durationString: String) : Node(durationString) {
     var minutes = 0
 
@@ -25,6 +27,16 @@ class DurationNode(durationString: String) : Node(durationString) {
             "minutes", "minute" -> minutes = numericValue * 1
             else -> throw ParseException("Invalid units in string given to DurationNode: $durationString")
         }
+    }
+
+    fun toDuration(): Duration {
+        val hours = minutes / 60
+        val minutes = minutes % 60
+        return Duration
+            .builder()
+            .hours(hours)
+            .minutes(minutes)
+            .build()
     }
 
     override fun interp(symbolTable: SymbolTable) {

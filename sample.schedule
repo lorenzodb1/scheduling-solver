@@ -1,5 +1,6 @@
 LET $X = 5pm
 SCHEDULE dinner AT $X
+SCHEDULE dinner AT 5pm ON EVERY Sunday AND Monday UNTIL December 1st ON Tuesday UNTIL December 4th
 
 LET $Z = Andromeda
 FOR $X IN {5pm, 6pm}
@@ -8,4 +9,17 @@ FOR $X IN {5pm, 6pm}
     ENDFOR
 ENDFOR
 
-SCHEDULE dinner AT 5pm ON EVERY Sunday AND Monday UNTIL December 1st ON Tuesday UNTIL December 4th
+
+FOR $x IN {5 am, 10 am, 12 am}
+
+    LET $z = EVERY Sunday AND Monday UNTIL October 17th
+    FOR $y IN {UBC, SFU, UW}
+        SCHEDULE Fencing AT $x DURATION 2 hours LOCATION $y ON $z WITH santa@ubc.ca
+    ENDFOR
+
+    FOR $y IN {UBC, SFU, UW}
+        SCHEDULE Fencing AT $x DURATION 2 hours LOCATION $y ON $z WITH santa@KingOfTheNorth.ca
+    ENDFOR
+ENDFOR
+
+

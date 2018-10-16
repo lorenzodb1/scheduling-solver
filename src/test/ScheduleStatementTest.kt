@@ -186,7 +186,7 @@ class ScheduleStatementTest {
         assertEquals(TimeNode("5pm"), scheduleStatement.time)
         assertEquals(null, scheduleStatement.duration)
         assertEquals(null, scheduleStatement.location)
-        assertArrayEquals(arrayOf<java.util.Date>(), scheduleStatement.dates)
+        assertArrayEquals(arrayOf<java.util.Date>(CurrentDate.date), scheduleStatement.dates)
         assertArrayEquals(arrayOf<GuestNode>(), scheduleStatement.guests)
     }
 
@@ -201,7 +201,7 @@ class ScheduleStatementTest {
         assertEquals(TimeNode("5pm"), scheduleStatement.time)
         assertEquals(DurationNode("2 hours"), scheduleStatement.duration)
         assertEquals(null, scheduleStatement.location)
-        assertArrayEquals(arrayOf<java.util.Date>(), scheduleStatement.dates)
+        assertArrayEquals(arrayOf<java.util.Date>(CurrentDate.date), scheduleStatement.dates)
         assertArrayEquals(arrayOf<GuestNode>(), scheduleStatement.guests)
     }
 
@@ -216,7 +216,7 @@ class ScheduleStatementTest {
         assertEquals(TimeNode("5pm"), scheduleStatement.time)
         assertEquals(null, scheduleStatement.duration)
         assertEquals(LocationNode("thunderbird field"), scheduleStatement.location)
-        assertArrayEquals(arrayOf<java.util.Date>(), scheduleStatement.dates)
+        assertArrayEquals(arrayOf<java.util.Date>(CurrentDate.date), scheduleStatement.dates)
         assertArrayEquals(arrayOf<GuestNode>(), scheduleStatement.guests)
     }
 
@@ -330,7 +330,7 @@ class ScheduleStatementTest {
         assertEquals(TimeNode("5pm"), scheduleStatement.time)
         assertEquals(null, scheduleStatement.duration)
         assertEquals(null, scheduleStatement.location)
-        assertArrayEquals(arrayOf<java.util.Date>(), scheduleStatement.dates)
+        assertArrayEquals(arrayOf<java.util.Date>(CurrentDate.date), scheduleStatement.dates)
         assertArrayEquals(arrayOf<GuestNode>(
                 GuestNode("asdf@asdf.com")
         ), scheduleStatement.guests)
@@ -347,7 +347,7 @@ class ScheduleStatementTest {
         assertEquals(TimeNode("5pm"), scheduleStatement.time)
         assertEquals(null, scheduleStatement.duration)
         assertEquals(null, scheduleStatement.location)
-        assertArrayEquals(arrayOf<java.util.Date>(), scheduleStatement.dates)
+        assertArrayEquals(arrayOf<java.util.Date>(CurrentDate.date), scheduleStatement.dates)
         assertArrayEquals(arrayOf<GuestNode>(
                 GuestNode("asdf@asdf.com"),
                 GuestNode("l33thAx0r@russia.ru")
@@ -365,7 +365,7 @@ class ScheduleStatementTest {
         assertEquals(TimeNode("5pm"), scheduleStatement.time)
         assertEquals(null, scheduleStatement.duration)
         assertEquals(null, scheduleStatement.location)
-        assertArrayEquals(arrayOf<java.util.Date>(), scheduleStatement.dates)
+        assertArrayEquals(arrayOf<java.util.Date>(CurrentDate.date), scheduleStatement.dates)
         assertArrayEquals(arrayOf<GuestNode>(
                 GuestNode("asdf@asdf.com"),
                 GuestNode("l33thAx0r@russia.ru")
@@ -382,7 +382,7 @@ class ScheduleStatementTest {
         assertEquals(TimeNode("5pm"), scheduleStatement.time)
         assertEquals(DurationNode("23 hours"), scheduleStatement.duration)
         assertEquals(LocationNode("Huge Dumpster"), scheduleStatement.location)
-        assertArrayEquals(arrayOf<java.util.Date>(), scheduleStatement.dates)
+        assertArrayEquals(arrayOf<java.util.Date>(CurrentDate.date), scheduleStatement.dates)
         assertArrayEquals(arrayOf<GuestNode>(), scheduleStatement.guests)
     }
 
@@ -397,7 +397,7 @@ class ScheduleStatementTest {
         assertEquals(TimeNode("5pm"), scheduleStatement.time)
         assertEquals(DurationNode("2 hours"), scheduleStatement.duration)
         assertEquals(LocationNode("Huge Dumpster"), scheduleStatement.location)
-        assertArrayEquals(arrayOf<java.util.Date>(), scheduleStatement.dates)
+        assertArrayEquals(arrayOf<java.util.Date>(CurrentDate.date), scheduleStatement.dates)
         assertArrayEquals(arrayOf<GuestNode>(), scheduleStatement.guests)
     }
 
@@ -438,7 +438,7 @@ class ScheduleStatementTest {
         assertEquals(TimeNode("5pm"), scheduleStatement.time)
         assertEquals(null, scheduleStatement.duration)
         assertEquals(null, scheduleStatement.location)
-        assertArrayEquals(arrayOf<java.util.Date>(), scheduleStatement.dates)
+        assertArrayEquals(arrayOf<java.util.Date>(CurrentDate.date), scheduleStatement.dates)
         assertArrayEquals(arrayOf<GuestNode>(), scheduleStatement.guests)
     }
 
@@ -455,7 +455,7 @@ class ScheduleStatementTest {
         assertEquals(TimeNode("5pm"), scheduleStatement.time)
         assertEquals(null, scheduleStatement.duration)
         assertEquals(null, scheduleStatement.location)
-        assertArrayEquals(arrayOf<java.util.Date>(), scheduleStatement.dates)
+        assertArrayEquals(arrayOf<java.util.Date>(CurrentDate.date), scheduleStatement.dates)
         assertArrayEquals(arrayOf<GuestNode>(), scheduleStatement.guests)
     }
 
@@ -471,7 +471,7 @@ class ScheduleStatementTest {
         assertEquals(TimeNode("5pm"), scheduleStatement.time)
         assertEquals(null, scheduleStatement.duration)
         assertEquals(null, scheduleStatement.location)
-        assertArrayEquals(arrayOf<java.util.Date>(), scheduleStatement.dates)
+        assertArrayEquals(arrayOf<java.util.Date>(CurrentDate.date), scheduleStatement.dates)
         assertArrayEquals(arrayOf<GuestNode>(), scheduleStatement.guests)
     }
 

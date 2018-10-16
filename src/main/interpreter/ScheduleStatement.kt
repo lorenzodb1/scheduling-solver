@@ -81,6 +81,11 @@ class ScheduleStatement(scheduleString: String) : Statement(scheduleString) {
             }
         }
 
+        // If we don't have any dates, assume the event should be scheduled today
+        if (dates.isEmpty()) {
+            dates = arrayOf(CurrentDate.date)
+        }
+
         // Sort the dates to make testing nice
         val mutable_dates = dates.toMutableList()
         sort(mutable_dates)
